@@ -50,3 +50,9 @@ Only publish photos the owner approved and the client agreed to share.
 ## Phase 3: 3D hair
 - **Hair locks in the hero** (`js/hero3d.js`, section "hair"): six locks of nine silky strands each, drawn in code in Brandie's real tones (honey, copper, ash blonde, espresso, caramel). They sweep in from the corners behind the mirror, part around the pointer, and shrink away during the portal dive. Phones get fewer, thinner strands. Edit `LOCKS` to change colors and lanes.
 - **Swatch ring** (`js/swatchring.js`, Gallery page "Find your shade"): a spinning 3D ring of 11 shades. Drag or tap to spin, it snaps to a shade, and "Show these photos" filters the gallery by that shade's tag (`SHADES` at the top of the file maps each shade to a gallery tag). The shade buttons under the ring are the keyboard and no-WebGL route.
+
+## Round 4 changes
+- **Hero:** no mirror and no scroll-through. The page is one big shimmering "LOOKING GLASS" wordmark over the 3D hair locks; scrolling just moves to the next section (`js/hero3d.js`, hair only).
+- **Hover:** the gold glare on cards, photos and tiles is gone. The tilt motion stays.
+- **Booking images:** `assets/book/` has one AI-made still life per service category (consultation, color, highlights, add-ons, smoothing, extensions), used on the booking page. They show tools, not hair results.
+- **3D tour:** `js/tour3d.js` on the Visit page. A simple 3D model of the studio, six stops, each showing a real photo. The 3D room is an illustration; the layout is simplified. Edit `STOPS` to change stops or captions.

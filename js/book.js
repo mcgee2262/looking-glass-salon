@@ -6,12 +6,16 @@
   var steps = document.querySelectorAll(".bk-steps li");
   function esc(t) { var d = document.createElement("div"); d.textContent = t == null ? "" : t; return d.innerHTML; }
 
-  // category photo; null shows a gold icon tile instead
+  // category pictures: AI-made still lifes of the tools for each service (not photos of her work)
   var PHOTO = {
-    "Consultation & Cuts": "assets/gallery/portfolio-11.jpg",
-    "Color": "assets/gallery/portfolio-05.jpg",
-    "Highlights & Balayage": "assets/gallery/portfolio-12.jpg"
+    "Consultation & Cuts": "assets/book/consult.jpg",
+    "Color": "assets/book/color.jpg",
+    "Highlights & Balayage": "assets/book/highlights.jpg",
+    "Add-Ons": "assets/book/addons.jpg",
+    "Smoothing Treatments": "assets/book/smoothing.jpg",
+    "Extensions": "assets/book/extensions.jpg"
   };
+
   var ICON = {
     "Add-Ons": '<path d="M24 6c6 9 12 15 12 22a12 12 0 0 1-24 0c0-7 6-13 12-22z"/>',
     "Smoothing Treatments": '<path d="M8 14c8-6 24 6 32 0M8 24c8-6 24 6 32 0M8 34c8-6 24 6 32 0" fill="none" stroke-width="3" stroke-linecap="round"/>',

@@ -421,3 +421,44 @@ h1,h2,h3{font-weight:500;letter-spacing:-.015em;line-height:1.06}
 .shade-list button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 10px;border:0;border-radius:999px;background:var(--step2);color:var(--ink);font:600 1rem system-ui,sans-serif;cursor:pointer}
 .shade-list button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 .shade-list .dot{width:22px;height:22px;border-radius:50%;display:inline-block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+
+/* ---- hero v2: no pinned scroll, no mirror. Big shimmering wordmark over the 3D hair ---- */
+.hero3d{height:auto}
+.hero3d .stage{position:relative;height:min(calc(100svh - 120px),880px);min-height:600px}
+.hero3d .wordmark{max-width:none;padding:0 var(--pad);justify-content:center;align-items:flex-start;animation:none}
+.hero3d .wordmark h1{font-size:clamp(3.6rem,14.5vw,13.5rem);line-height:.9}
+.hero3d .wordmark .chrome{display:block;background-size:300% 100%}
+.hero3d .tagline{margin:clamp(14px,2vw,26px) 0 0;font:italic 500 clamp(1.5rem,3.4vw,2.8rem)/1.1 "Playfair Display",Georgia,serif;color:var(--ink)}
+.hero3d .salon{margin:10px 0 0;max-width:30em}
+.hero-cta{margin:clamp(18px,2.4vw,30px) 0 0}
+.hero3d.tall .wordmark{align-items:center;text-align:center;justify-content:flex-start;padding-top:clamp(36px,8vh,90px)}
+.hero3d.tall .wordmark h1{font-size:clamp(3.4rem,19vw,8rem)}
+.hero3d .cue{z-index:2}
+.hero3d.no3d .stage{min-height:520px}
+@media(prefers-reduced-motion:reduce){.hero3d .stage{height:auto;min-height:560px}}
+
+/* hover: keep the tilt motion, drop the gold glare and gold hover shadow */
+.svc-card::after,.fact::after,.pic::after,.tile::after{display:none!important;background:none!important}
+.is-tilting{box-shadow:0 2px 0 var(--gold-lo),0 30px 40px -24px rgba(50,56,44,.35)!important}
+.pic:hover,.tile:hover,.svc-card:hover,.fact:hover{filter:none}
+
+/* 3D tour */
+.btn.alt{background:var(--step2);color:var(--ink);box-shadow:none;border:2px solid var(--gold);margin-left:8px}
+.tour-stage{position:relative;background:var(--step1)}
+.tour-stage canvas{display:block;width:100%;height:clamp(340px,56vw,620px);cursor:grab;touch-action:pan-y}
+.tour-stage canvas:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.tour-card{position:absolute;left:14px;bottom:14px;margin:0;width:min(250px,42%);background:#fff;padding:8px;border:3px solid;border-image:var(--gold-grad) 1;pointer-events:none}
+.tour-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.tour-card figcaption{padding:8px 4px 2px;font-size:.95rem;line-height:1.3;color:var(--ink)}
+.tour-card strong{display:block;font:700 1.15rem "Playfair Display",Georgia,serif}
+.tour-hint{position:absolute;right:14px;top:12px;margin:0;padding:4px 12px;background:rgba(255,255,255,.85);border-radius:999px;font:600 .9rem system-ui,sans-serif;color:var(--ink);pointer-events:none}
+.tour-bar{display:flex;align-items:center;gap:12px;margin:14px 0 6px;flex-wrap:wrap}
+.tour-bar>button{width:48px;height:48px;border-radius:50%;border:0;background:var(--step2);color:var(--ink);font:700 1.3rem system-ui,sans-serif;cursor:pointer}
+.tour-count{font:700 1.05rem system-ui,sans-serif;min-width:4.5em}
+.tour-dots{display:flex;gap:10px;margin-right:auto}
+.tour-dots button{width:16px;height:16px;border-radius:50%;border:2px solid var(--gold-lo);background:#fff;cursor:pointer;padding:0}
+.tour-dots button[aria-current="true"]{background:var(--accent);border-color:var(--accent)}
+.tour-note{margin:6px 0 0;font-size:1rem;color:var(--muted);max-width:44em}
+.tour3d.no3d .tour-stage canvas,.tour3d.no3d .tour-hint{display:none}
+.tour3d.no3d .tour-card{position:static;width:100%;max-width:420px;pointer-events:auto}
+@media(max-width:640px){.tour-card{position:static;width:100%;margin-top:0;border-width:2px}.tour-card img{aspect-ratio:16/9}.tour-hint{top:auto;bottom:8px}}

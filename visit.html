@@ -18,8 +18,24 @@
 <section class="phero wrap">
 <div><h1 class="rv">Visit us</h1>
 <p class="lede rv">Find Brandie at Looking Glass Salon in Sterling, VA. Hours, address and contact details are coming soon. You can book online any time.</p>
-<p class="rv"><a class="btn big" data-book>Book now</a></p></div>
+<p class="rv"><a class="btn big" data-book>Book now</a> <a class="btn big alt" href="#tour">Take the 3D tour</a></p></div>
 <figure class="pic rv"><img src="assets/studio/studio-3.jpg" width="1050" height="1400" alt="The studio: a reception desk, shampoo bowls and light wood floors by large windows" decoding="async"></figure>
+</section>
+<section class="wrap sec-h tour3d" id="tour" aria-labelledby="t3-h">
+<h2 id="t3-h" class="rv">Take the 3D tour</h2>
+<p class="rv">Glide through the studio in six stops. Drag to look around, or use the arrows. Each stop shows a real photo.</p>
+<div class="tour-stage rv">
+<canvas tabindex="0" aria-label="3D model of the studio. Use the previous and next buttons, or the left and right arrow keys, to move between six stops. Drag to look around."></canvas>
+<figure class="tour-card"><img alt="" width="1050" height="1400"><figcaption><strong></strong><span></span></figcaption></figure>
+<p class="tour-hint" aria-hidden="true">Drag to look around</p>
+</div>
+<div class="tour-bar rv">
+<button class="tour-prev" type="button" aria-label="Previous stop">&larr;</button>
+<span class="tour-count" aria-live="polite"></span>
+<div class="tour-dots" role="group" aria-label="Tour stops"></div>
+<button class="tour-next" type="button" aria-label="Next stop">&rarr;</button>
+</div>
+<p class="tour-note">The 3D room is an illustration built from photos of the studio; the layout is simplified. The photos are the real thing.</p>
 </section>
 <section class="wrap sec-h" aria-labelledby="tour-h">
 <h2 id="tour-h" class="rv">Take a look inside</h2>
@@ -42,5 +58,7 @@
 <footer id="site-footer"></footer>
 <script src="js/content.js"></script>
 <script src="js/site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/tour3d.js" defer></script>
 </body>
 </html>
