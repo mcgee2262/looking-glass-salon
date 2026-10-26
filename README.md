@@ -1,4 +1,15 @@
-# Looking Glass Salon site (draft)
+# Looking Glass Salon
+
+## 👉 View the live site: https://mcgee2262.github.io/looking-glass-salon/
+
+This is a **draft for the owner to review**. Service names, prices and times were copied from the public GlossGenius page and are not yet approved. Anything marked "To be confirmed" is waiting on the owner. Booking happens on GlossGenius.
+
+Pages: [Home](https://mcgee2262.github.io/looking-glass-salon/) · [Services](https://mcgee2262.github.io/looking-glass-salon/services.html) · [Gallery](https://mcgee2262.github.io/looking-glass-salon/gallery.html) · [About](https://mcgee2262.github.io/looking-glass-salon/about.html) · [Visit](https://mcgee2262.github.io/looking-glass-salon/visit.html)
+
+Changes can take about a minute to appear after they are pushed.
+
+---
+
 
 Plain static HTML/CSS/JS. No build step. Booking stays on GlossGenius.
 
