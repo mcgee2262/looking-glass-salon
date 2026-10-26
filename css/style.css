@@ -36,3 +36,48 @@ figcaption{font-size:.9rem;color:var(--muted);margin-top:6px}
 dl{display:grid;grid-template-columns:max-content 1fr;gap:8px 20px}dt{font-weight:700;font-family:system-ui,sans-serif}dd{margin:0}
 footer{border-top:1px solid var(--line);padding:24px 16px;text-align:center;color:var(--muted);font-size:.95rem}
 @media(prefers-reduced-motion:no-preference){.btn{transition:transform .15s}.btn:hover{transform:translateY(-1px)}}
+
+/* ---- hero 3D, chrome wordmark, portal ---- */
+.float-book{position:fixed;right:16px;bottom:16px;z-index:20;box-shadow:0 6px 24px rgba(0,0,0,.35)}
+body[data-page="index"] main{max-width:none;padding:0}
+body[data-page="index"] main>:not(.hero3d){max-width:1000px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px}
+body[data-page="index"] main>h2:first-of-type{padding-top:24px}
+body[data-page="index"] main>.cards{padding-bottom:16px}
+.hero3d{height:360vh;position:relative;background:#140d12;color:#fff}
+.hero3d .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 40%,#3a1a33 0%,#140d12 70%)}
+.hero3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.wordmark{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:0 8px;will-change:transform,opacity;--shine:50%}
+.wordmark h1{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800;letter-spacing:-.03em;
+  font-size:clamp(2.6rem,13.5vw,9.5rem);line-height:.95}
+.chrome{display:inline-block;color:transparent;-webkit-background-clip:text;background-clip:text;
+  background-image:linear-gradient(105deg,#6c6670 0%,#f4f1f5 18%,#9a8f9c 32%,#e7b9ae 46%,#fff 54%,#a0507a 68%,#e9d9e1 82%,#7d7280 100%);
+  background-size:260% 100%;background-position:var(--shine) 50%;
+  filter:drop-shadow(0 2px 18px rgba(214,150,170,.25))}
+.salon{margin:14px 0 0;font:600 clamp(.75rem,2.2vw,1rem)/1 system-ui,sans-serif;letter-spacing:.5em;color:#e9b6b0;padding-left:.5em}
+.cue{position:absolute;bottom:28px;left:0;right:0;text-align:center;margin:0;font:.85rem system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#d9c3cc}
+.tilt-btn{position:absolute;top:12px;right:12px;z-index:3;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #e9b6b0;background:rgba(20,13,18,.6);color:#f7dcd6;font:600 .9rem system-ui,sans-serif}
+.tilt-btn[hidden]{display:none}
+.flash{position:absolute;inset:0;opacity:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 50%,#fff6f0 0%,#f5c9c6 45%,#b9708e 100%)}
+.other-side{position:absolute;inset:0;opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:0 20px;color:#3a1a33;background:linear-gradient(160deg,#fff6f0,#f3cfd0 60%,#e2a7bd);--flip:-1}
+.other-side .through{margin:0;font:italic 700 clamp(2rem,8vw,5rem)/1.05 Georgia,serif;transform:scaleX(var(--flip));transform-origin:center}
+.other-side .sub{margin:14px 0 22px;font:1.1rem system-ui,sans-serif;color:#5e3a52}
+.other-side .btn{background:#3a1a33;color:#fff}
+/* CSS mirror shows only if 3D cannot run */
+.css-mirror{display:none}
+.hero3d.no3d .css-mirror{display:block;position:absolute;left:50%;top:50%;width:min(46vw,260px);aspect-ratio:3/4;transform:translate(-50%,-50%);
+  border-radius:50%;border:10px solid #c98a86;background:linear-gradient(135deg,#2a1226,#8a4b62 45%,#e9a9a0 75%,#fff0e8);
+  box-shadow:0 0 60px rgba(201,138,134,.35)}
+.hero3d.no3d canvas,.hero3d.no3d .tilt-btn{display:none}
+.hero3d.no3d{height:auto}.hero3d.no3d .stage{position:relative;height:auto;min-height:100svh}
+.hero3d.no3d .other-side{position:relative;opacity:1;margin-top:60vh;padding:48px 20px}
+.hero3d.no3d .other-side .through{transform:none}
+@media(prefers-reduced-motion:reduce){
+  .hero3d{height:auto}.hero3d .stage{position:relative;height:auto;min-height:100svh}
+  .hero3d .flash{display:none}.hero3d .cue{display:none}
+  .hero3d .other-side{position:relative;opacity:1!important;margin-top:60vh;padding:48px 20px;--flip:1!important}
+  .hero3d .other-side .through{transform:none}
+}

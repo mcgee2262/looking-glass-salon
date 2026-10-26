@@ -12,7 +12,24 @@
 <body data-page="index">
 <header id="site-header"></header>
 <main id="main">
-<section class="hero"><h1>Hair color, cuts and smoothing treatments.</h1><p>Looking Glass Salon in Sterling, VA. Pick a service, then book in a few taps on GlossGenius.</p><p><a class="btn big" data-book>Book now</a></p></section>
+<section class="hero3d" id="hero3d" aria-label="Looking Glass Salon">
+  <div class="stage">
+    <div class="css-mirror" aria-hidden="true"></div>
+    <div class="wordmark">
+      <h1><span class="chrome">LOOKING GLASS</span></h1>
+      <p class="salon">SALON · STERLING, VA</p>
+    </div>
+    <canvas id="mirror-canvas" aria-hidden="true"></canvas>
+    <p class="cue" aria-hidden="true">Scroll ✦ step through</p>
+    <button class="tilt-btn" type="button" hidden>✦ Tilt</button>
+    <div class="flash" aria-hidden="true"></div>
+    <div class="other-side">
+      <p class="through">Through the looking glass.</p>
+      <p class="sub">Hair color, cuts and smoothing treatments.</p>
+      <p><a class="btn big" data-book>Book now</a></p>
+    </div>
+  </div>
+</section>
 <h2>Popular services</h2>
 <div class="cards">
 <div class="card"><h3>Color &amp; highlights</h3><p>Balayage, highlights and all-over color with gloss.</p><a href="services.html">See services</a></div>
@@ -23,6 +40,8 @@
 </main>
 <footer id="site-footer"></footer>
 <script src="js/content.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/hero3d.js" defer></script>
 <script src="js/site.js"></script>
 </body>
 </html>

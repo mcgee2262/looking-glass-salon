@@ -18,6 +18,11 @@
     '<p><strong>' + esc(S.name) + '</strong> · ' + (S.location.city ? esc(S.location.city) : tbc) + '</p>' +
     '<p>Booking is completed on GlossGenius. <a href="'+S.bookingUrl+'" target="_blank" rel="noopener">Book an appointment</a></p>';
 
+  var fb = document.createElement("a");
+  fb.className = "btn float-book"; fb.textContent = "Book"; fb.href = S.bookingUrl;
+  fb.target = "_blank"; fb.rel = "noopener"; fb.setAttribute("aria-label", "Book an appointment on GlossGenius");
+  document.body.appendChild(fb);
+
   var btn = document.querySelector(".menu-btn"), n = document.getElementById("nav");
   btn.addEventListener("click", function(){
     var open = n.classList.toggle("open"); btn.setAttribute("aria-expanded", open);
