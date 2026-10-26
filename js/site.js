@@ -67,6 +67,8 @@
     var items = window.GALLERY;
     var tags = [];
     items.forEach(function (g) { (g.tags || []).forEach(function (t) { if (tags.indexOf(t) < 0) tags.push(t); }); });
+    var order = ["Blonde", "Brunette", "Red", "Highlights", "Bobs", "Extensions", "Process", "Before & After", "Braids", "Vivid color", "Kids"];
+    tags.sort(function (a, b) { var x = order.indexOf(a), y = order.indexOf(b); return (x < 0 ? 99 : x) - (y < 0 ? 99 : y); });
     var dlg = document.getElementById("lightbox"), cur = [], at = 0;
     function tile(g, i) {
       var cap = g.caption ? '<figcaption>' + esc(g.caption) + '</figcaption>' : '';
@@ -75,7 +77,7 @@
         return '<figure class="rv" data-tags="' + tg + '"><div class="ph" role="img" aria-label="Photo coming soon"><strong>' + esc((g.tags || ["Photo"])[0]) + '</strong><span>Photo coming soon</span></div>' + cap + '</figure>';
       }
       return '<figure class="rv" data-tags="' + tg + '"><button type="button" class="tile" data-i="' + i + '" aria-label="Enlarge photo' +
-        (g.caption ? ': ' + esc(g.caption.slice(0, 60)) : '') + '"><img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" decoding="async"' + (g.pos ? ' style="object-position:' + esc(g.pos) + '"' : '') + '></button>' + cap + '</figure>';
+        (g.caption ? ': ' + esc(g.caption.slice(0, 60)) : '') + '"><img src="' + esc(g.thumb || g.src) + '" alt="' + esc(g.alt) + '" loading="lazy" decoding="async"' + (g.pos ? ' style="object-position:' + esc(g.pos) + '"' : '') + '></button>' + cap + '</figure>';
     }
     function showGallery(tag) {
       cur = items.filter(function (g) { return tag === "All" || (g.tags || []).indexOf(tag) >= 0; });
@@ -153,6 +155,36 @@
     var v = e.dataset.fact.split(".").reduce(function(o,k){return o && o[k];}, S);
     e.innerHTML = v ? esc(v) : tbc;
   });
+
+
+  // before/after slider: an invisible range input sits over the photos, so touch, mouse and keyboard all work
+  document.querySelectorAll(".ba").forEach(function (b) {
+    var r = b.querySelector("input[type=range]");
+    function set() { b.style.setProperty("--pos", r.value + "%"); }
+    r.addEventListener("input", set); set();
+  });
+
+  // video loops: load and play only near the screen, pause when far away; reduced-motion users keep the poster
+  var calmVideo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var vids = Array.prototype.slice.call(document.querySelectorAll("video[data-src]"));
+  function checkVideos() {
+    var vh = window.innerHeight || 800;
+    vids.forEach(function (v) {
+      if (calmVideo) return;
+      var r = v.getBoundingClientRect(), near = r.bottom > -vh * 0.3 && r.top < vh * 1.3;
+      if (near) {
+        if (!v.getAttribute("src")) v.setAttribute("src", v.dataset.src);
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      } else if (v.getAttribute("src") && !v.paused) { v.pause(); }
+    });
+  }
+  if (vids.length) {
+    window.addEventListener("scroll", checkVideos, { passive: true });
+    window.addEventListener("resize", checkVideos);
+    window.addEventListener("load", checkVideos);
+    setInterval(checkVideos, 600);
+    checkVideos();
+  }
 
   // entrance: rise and fade once, staggered inside each parent. Checked on scroll, so it never depends on observers.
   var pending = [];

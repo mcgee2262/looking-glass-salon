@@ -34,3 +34,10 @@ Earthy palette: warm cream and pale wood, sage and moss greens, muted brass trim
 2. In `js/content.js`, edit a `GALLERY` entry: set `src` (for example `assets/gallery/red-refresh.jpg`), `alt` (what the photo shows), an optional `caption`, and `tags`.
 3. Tags become the filter chips on the Gallery page. Entries with `src: null` show a "Photo coming soon" tile.
 Only publish photos the owner approved and the client agreed to share.
+
+## Photos and videos (from the owner's "mama ryan" folder)
+- Gallery photos: `assets/gallery/ryan-NN.jpg` (1400px) with `ryan-NN-t.jpg` thumbnails (640px). All EXIF and GPS data was removed. The owner confirmed clients agreed to have their faces shown.
+- Before/after sliders: `assets/ba/ba-01`, `ba-02` (halves of the owner's collages). Extensions story: `assets/ba/ext-1` to `ext-3`. To add a slider, copy a `<figure class="ba">` block from `gallery.html`.
+- Studio tour: `assets/studio/`. Brandie's photo: `assets/brandie.jpg`.
+- Video loops: `assets/video/*.mp4` with `.jpg` posters. Six seconds, silent, about 1.8 MB each. They load and play only when scrolled near. Make more with the same settings (640x480 preset, audio removed).
+- Originals stay in the owner's folder; they are not in this repo.
