@@ -4,8 +4,10 @@
 window.SALON = {
   name: "Looking Glass Salon",
   tagline: "Hair color, cuts and smoothing treatments",
-  // One booking URL for every "Book" button. Booking happens on GlossGenius.
-  bookingUrl: "https://brandieryan.glossgenius.com/book",
+  // One booking URL for every "Book" button. Always the site's own booking page; never point Book buttons at GlossGenius.
+  bookingUrl: "book.html",
+  // Her old GlossGenius site, linked from the footer "Old website" button for reference only.
+  oldSiteUrl: "https://brandieryan.glossgenius.com/",
   existingSiteUrl: "https://brandieryan.glossgenius.com/portfolio",
   // null = unknown. Pages show a "to be confirmed" note instead of a fake value.
   location: { city: "Sterling, VA", address: null, parking: null, review: true },
@@ -13,7 +15,8 @@ window.SALON = {
   email: null,
   hours: null,
   social: { instagram: null, facebook: null },
-  owner: { name: null, bio: null },
+  // bio left empty on purpose: Brandie is writing it herself.
+  owner: { name: "Brandie Ryan", nickname: "Mama Ryan", role: "Owner and stylist", bio: null },
   policies: { cancellation: null },
   domain: null
 };
@@ -63,8 +66,8 @@ window.SERVICES = [
     { name: "Cezanne Ultimate Blonde Treatment", price: "$400+", duration: 180, desc: "Lasts about 5 months. Blue-violet pigment to remove brassy shades while smoothing damaged hair." }
   ]},
   { cat: "Extensions", items: [
-    { name: "Tape Extension Installation", price: "$435+", duration: 90, desc: "First-time tape-in install. $75 deposit required for new clients. Bundles start at $120 per 10 pieces; install is $175. Custom color work costs extra." },
-    { name: "Tape Extension Removal / Reinstall", price: "$250+", duration: 150, desc: "Tape-ins are removed, washed and reinstalled. $175 deposit required." },
+    { name: "Tape Extension Installation", price: "$435+", duration: 90, desc: "$75.00 deposit required for new clients. First time installation of tape in hair extensions. Cost starts at $120 per 10 piece bundle, depending on length of hair, available in 14\u201d, 20\u201d and 24\u201d. Installation is $175. Additional charge for custom color work. Average head is between 2-3 bundles depending on the desired look." },
+    { name: "Tape Extension Removal / Reinstall", price: "$250+", duration: 150, desc: "$175.00 deposit required. Hair tape in extensions is removed, washed, and reinstalled. Hair can last up to a year with 6-8 week maintenance and proper care." },
     { name: "Sew-In Micro Weft Installation", price: "$500+", duration: 180, desc: "Hair not included. Starting price; varies by number of rows." },
     { name: "Sew-In Micro Weft Removal", price: "$75", duration: 30, desc: "Removal only. Does not include putting wefts back in." },
     { name: "Sew-In Weft Move Up", price: "$200+", duration: 120, desc: "Sew-in removal and reinstall." },

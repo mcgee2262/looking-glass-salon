@@ -11,7 +11,7 @@
   var cue = hero.querySelector(".cue");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function fallback() { hero.classList.add("no3d"); }
+  function fallback() { hero.classList.add("no3d"); other.classList.add("on"); }
   if (!window.THREE) return fallback();
 
   var renderer;
@@ -298,10 +298,8 @@
     if (cue) cue.style.opacity = 1 - ease(p / 0.08);
     flash.style.opacity = ease((p - 0.5) / 0.28);
     canvas.style.opacity = 1 - ease((p - 0.78) / 0.1);
-    var o = ease((p - 0.8) / 0.18);
-    other.style.opacity = o;
-    other.style.setProperty("--flip", String(1 - 2 * (1 - o))); // -1 mirrored to 1 correct
-    other.style.pointerEvents = o > 0.5 ? "auto" : "none";
+    // past the flash the other side plays its own timed spin; a gap between the two thresholds stops flicker
+    if (p > 0.8) other.classList.add("on"); else if (p < 0.72) other.classList.remove("on");
     mark.style.setProperty("--shine", (50 + nx * 35) + "%");
   }
 
@@ -315,5 +313,5 @@
       requestAnimationFrame(tick);
     })(performance.now());
   }
-  if (reduce) { frame(performance.now()); } else { loop(); }
+  if (reduce) { other.classList.add("on"); frame(performance.now()); } else { loop(); }
 })();

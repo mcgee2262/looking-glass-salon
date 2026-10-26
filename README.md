@@ -14,7 +14,7 @@ Changes can take about a minute to appear after they are pushed.
 Plain static HTML/CSS/JS. No build step. Booking stays on GlossGenius.
 
 - Edit business details, services, gallery: `js/content.js` (only place).
-- Booking URL: `SALON.bookingUrl` in `js/content.js`.
+- Booking: every Book button goes to the site's own booking page (`book.html`, `SALON.bookingUrl`). Never point Book buttons at GlossGenius. The footer has an "Old website" button linking her GlossGenius site (`SALON.oldSiteUrl`) for reference only.
 - Run locally: `python3 -m http.server 8431`
 - Every service/price/duration came from the public GlossGenius page on 2026-10-25. Unapproved. Null fields show "To be confirmed".
 - Pages carry `noindex`. Remove it, add canonical, og:image and LocalBusiness JSON-LD after owner approval and domain pick.
