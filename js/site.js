@@ -34,14 +34,42 @@
 
   var el = document.getElementById("services");
   if (el) {
-    var feature = el.dataset.featured === "true";
-    el.innerHTML = window.SERVICES.map(function(g){
-      return '<section class="cat"><h2>'+esc(g.cat)+'</h2><ul>' + g.items.map(function(s){
-        var meta = [s.price, s.duration ? s.duration + " min" : null].filter(Boolean).join(" · ");
-        return '<li><div class="svc-head"><h3>'+esc(s.name)+'</h3><span class="meta">'+esc(meta)+'</span></div>' +
-          (s.desc ? '<p>'+esc(s.desc)+'</p>' : '') + '</li>';
-      }).join("") + '</ul></section>';
-    }).join("");
+    var chips = document.getElementById("chips");
+    function card(s) {
+      var url = s.url || S.bookingUrl;
+      return '<article class="svc-card"><div class="shine" aria-hidden="true"></div>' +
+        '<p class="svc-cat">' + esc(s.cat) + '</p><h3>' + esc(s.name) + '</h3>' +
+        (s.desc ? '<p class="svc-desc">' + esc(s.desc) + '</p>' : '') +
+        '<div class="svc-foot"><div><span class="svc-price">' + esc(s.price || "") + '</span>' +
+        (s.duration ? '<span class="svc-time">' + s.duration + ' min</span>' : '') + '</div>' +
+        '<a class="svc-book" href="' + esc(url) + '" target="_blank" rel="noopener" aria-label="Book ' + esc(s.name) + '">Book <span aria-hidden="true">\u2192</span></a></div></article>';
+    }
+    var all = [];
+    window.SERVICES.forEach(function (g) { g.items.forEach(function (i) { i.cat = g.cat; all.push(i); }); });
+    function show(cat) {
+      el.innerHTML = '<div class="svc-grid">' + all.filter(function (i) { return cat === "All" || i.cat === cat; }).map(card).join("") + '</div>';
+      if (chips) chips.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.cat === cat); });
+    }
+    if (chips) {
+      chips.innerHTML = ["All"].concat(window.SERVICES.map(function (g) { return g.cat; })).map(function (c) {
+        return '<button type="button" data-cat="' + esc(c) + '" aria-pressed="false">' + esc(c) + '</button>';
+      }).join("");
+      chips.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) show(b.dataset.cat); });
+    }
+    show("All");
+    var fine = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+    var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (fine && !calm) {
+      el.addEventListener("pointermove", function (e) {
+        var c = e.target.closest(".svc-card"); if (!c) return;
+        var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        c.style.transform = "perspective(700px) rotateY(" + ((x - .5) * 10) + "deg) rotateX(" + ((.5 - y) * 10) + "deg) translateZ(0)";
+        c.style.setProperty("--mx", (x * 100) + "%"); c.style.setProperty("--my", (y * 100) + "%");
+      });
+      el.addEventListener("pointerout", function (e) {
+        var c = e.target.closest(".svc-card"); if (c && !c.contains(e.relatedTarget)) c.style.transform = "";
+      });
+    }
   }
 
   var gal = document.getElementById("gallery");
