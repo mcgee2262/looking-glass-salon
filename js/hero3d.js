@@ -32,14 +32,14 @@
     var t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t;
   }
 
-  // ---- environment: soft plum and rose-gold "room" so the metal reflects something real
+  // ---- environment: soft pink and rose-gold "room" so the metal reflects something real
   var envScene = new THREE.Scene();
   var envTex = canvasTex(1024, 512, function (g, w, h) {
     var v = g.createLinearGradient(0, 0, 0, h);
-    v.addColorStop(0, "#fff0e8"); v.addColorStop(0.35, "#e9a9a0"); v.addColorStop(0.6, "#7a3a62"); v.addColorStop(1, "#1c0f19");
+    v.addColorStop(0, "#ffffff"); v.addColorStop(0.35, "#fbd9e5"); v.addColorStop(0.6, "#e9a0bb"); v.addColorStop(1, "#b0607f");
     g.fillStyle = v; g.fillRect(0, 0, w, h);
     [[200, 150, 120, "rgba(255,255,255,.9)"], [620, 120, 150, "rgba(255,225,200,.8)"], [880, 250, 90, "rgba(255,255,255,.7)"],
-     [420, 330, 140, "rgba(150,60,140,.7)"]].forEach(function (b) {
+     [420, 330, 140, "rgba(230,130,170,.7)"]].forEach(function (b) {
       var r = g.createRadialGradient(b[0], b[1], 0, b[0], b[1], b[2]);
       r.addColorStop(0, b[3]); r.addColorStop(1, "rgba(0,0,0,0)");
       g.fillStyle = r; g.fillRect(0, 0, w, h);
@@ -54,7 +54,7 @@
   // lights: soft fill plus a "cursor lamp" that follows the pointer
   scene.add(new THREE.AmbientLight(0xffe7ee, 0.35));
   var lamp = new THREE.PointLight(0xfff0e6, 1.5, 16); lamp.position.set(0, 0, 3); scene.add(lamp);
-  var plum = new THREE.PointLight(0x9b4b86, 1.2, 30); plum.position.set(-4, -2, 4); scene.add(plum);
+  var plum = new THREE.PointLight(0xe98fb2, 1.2, 30); plum.position.set(-4, -2, 4); scene.add(plum);
 
   // ---- materials
   var gold = new THREE.MeshStandardMaterial({ color: 0xd99a90, metalness: 1, roughness: 0.2, envMap: envMap, envMapIntensity: 1.25 });
@@ -63,10 +63,10 @@
   // glass: fake reflection, with the wordmark written backwards like a real mirror
   var glassTex = canvasTex(512, 512, function (g, w, h) {
     var lin = g.createLinearGradient(0, 0, w, h);
-    lin.addColorStop(0, "#2a1226"); lin.addColorStop(0.45, "#8a4b62");
-    lin.addColorStop(0.75, "#e9a9a0"); lin.addColorStop(1, "#fff0e8");
+    lin.addColorStop(0, "#f2a9c3"); lin.addColorStop(0.45, "#fbd9e5");
+    lin.addColorStop(0.75, "#fff3f7"); lin.addColorStop(1, "#ffffff");
     g.fillStyle = lin; g.fillRect(0, 0, w, h);
-    [[130, 150, 150, "rgba(255,200,190,.55)"], [380, 330, 170, "rgba(120,50,120,.55)"],
+    [[130, 150, 150, "rgba(255,200,190,.55)"], [380, 330, 170, "rgba(240,160,190,.55)"],
      [300, 90, 110, "rgba(255,240,230,.45)"]].forEach(function (b) {
       var r = g.createRadialGradient(b[0], b[1], 0, b[0], b[1], b[2]);
       r.addColorStop(0, b[3]); r.addColorStop(1, "rgba(0,0,0,0)");
@@ -75,9 +75,9 @@
     g.save(); g.translate(w / 2, h / 2); g.scale(-1, 1 / 1.3); // mirrored; undo oval stretch
     g.textAlign = "center"; g.textBaseline = "middle";
     g.font = "800 70px system-ui, -apple-system, 'Segoe UI', sans-serif";
-    g.fillStyle = "rgba(255,244,238,.55)";
+    g.fillStyle = "rgba(142,44,92,.35)";
     g.fillText("LOOKING", 0, -42); g.fillText("GLASS", 0, 42);
-    g.font = "600 24px system-ui, sans-serif"; g.fillStyle = "rgba(255,220,210,.5)";
+    g.font = "600 24px system-ui, sans-serif"; g.fillStyle = "rgba(142,44,92,.3)";
     g.fillText("S A L O N", 0, 108);
     g.restore();
   });
@@ -143,18 +143,18 @@
   var handle = new THREE.Mesh(new THREE.LatheGeometry(prof, small ? 20 : 36), gold);
   handle.position.y = -1.38;
   var gem = new THREE.Mesh(new THREE.IcosahedronGeometry(0.2, 1),
-    new THREE.MeshStandardMaterial({ color: 0x8a2f78, metalness: 0.35, roughness: 0.08, envMap: envMap, envMapIntensity: 1.6, flatShading: true }));
+    new THREE.MeshStandardMaterial({ color: 0xe46a9a, metalness: 0.35, roughness: 0.08, envMap: envMap, envMapIntensity: 1.6, flatShading: true }));
   gem.scale.set(1, 1.35, 1); gem.position.y = -1.38 - 1.6 - 0.14;
   mirror.add(face, beads, handle, gem);
 
   // soft light pool under the mirror
   var glowTex = canvasTex(256, 256, function (g, w, h) {
     var r = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
-    r.addColorStop(0, "rgba(255,190,170,.9)"); r.addColorStop(0.5, "rgba(200,100,140,.35)"); r.addColorStop(1, "rgba(0,0,0,0)");
+    r.addColorStop(0, "rgba(242,150,185,.55)"); r.addColorStop(0.5, "rgba(250,200,220,.3)"); r.addColorStop(1, "rgba(0,0,0,0)");
     g.fillStyle = r; g.fillRect(0, 0, w, h);
   });
   var pool = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 4.2),
-    new THREE.MeshBasicMaterial({ map: glowTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+    new THREE.MeshBasicMaterial({ map: glowTex, transparent: true, depthWrite: false })); // normal blend: additive glow vanishes on a white page
   pool.rotation.x = -Math.PI / 2; pool.position.y = -3.7;
   rig.add(pool);
 
@@ -172,7 +172,7 @@
     }
     var g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
     return new THREE.Points(g, new THREE.PointsMaterial({ map: starTex, size: 0.32, transparent: true, depthWrite: false,
-      blending: THREE.AdditiveBlending, color: 0xffd9c8 }));
+      color: 0xd9709b }));
   }
   var spA = sparkles(small ? 10 : 18, 0), spB = sparkles(small ? 10 : 18, 2.1);
   rig.add(spA, spB);
