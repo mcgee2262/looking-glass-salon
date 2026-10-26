@@ -73,17 +73,25 @@ window.SERVICES = [
   ]}
 ];
 
-// Gallery: real photos go in assets/gallery/. For each one set src, alt (what the photo shows,
+// Gallery: photos live in assets/gallery/. For each one set src, alt (what the photo shows,
 // for screen readers), caption (optional) and tags. A null src shows a "Photo coming soon" tile.
-// Only add photos the owner approved and the client agreed to share. Tags become the filter chips.
-// Captions below are the public ones from the existing GlossGenius portfolio; no photos copied.
+// Optional pos sets which part of the photo shows in the square tile (default center). Tags become the filter chips. Photos below are from the owner's GlossGenius portfolio, used with her permission.
 window.GALLERY = [
-  { src: null, alt: "", caption: "Red head refresh!", tags: ["Color", "Red"] },
-  { src: null, alt: "", caption: "Beautiful sun kissed highlights with dimensional root shadowing.", tags: ["Highlights"] },
-  { src: null, alt: "", caption: "Honey gloss over faded highlights to richen the color and give shine and improved health to the hair.", tags: ["Color", "Blonde"] },
-  { src: null, alt: "", caption: "Blonde refresh with a mix of highlights and grey blending color.", tags: ["Highlights", "Blonde"] },
-  { src: null, alt: "", caption: "", tags: ["Cuts"] },
-  { src: null, alt: "", caption: "", tags: ["Extensions"] },
-  { src: null, alt: "", caption: "", tags: ["Smoothing"] },
-  { src: null, alt: "", caption: "", tags: ["Balayage"] }
+  { src: "assets/gallery/portfolio-01.jpg", alt: "Four before and after views of a blonde cut with soft, blended highlights", caption: "Blonde refresh with a mix of highlights and grey blending color.", tags: ["Blonde", "Highlights"] },
+  { src: "assets/gallery/portfolio-02.jpg", alt: "Stylist lifting long brown hair with blonde highlights on a young woman looking down", caption: "", tags: ["Brunette", "Highlights"] },
+  { src: "assets/gallery/portfolio-03.jpg", alt: "Back view of long brown hair with golden highlights", caption: "", tags: ["Brunette", "Highlights"] },
+  { src: "assets/gallery/portfolio-04.jpg", alt: "Back view of long, smooth, glossy brown hair in the salon", caption: "", tags: ["Brunette"] },
+  { src: "assets/gallery/portfolio-05.jpg", alt: "Long, straight, shiny brown hair with soft caramel tones", caption: "", tags: ["Brunette"] },
+  { src: "assets/gallery/portfolio-06.jpg", alt: "Before photo: auburn hair from behind, marked Before", caption: "Before", pos: "left top", tags: ["Before & After"] },
+  { src: "assets/gallery/portfolio-07.jpg", alt: "After photo: shoulder-length hair with soft blended blonde tones, marked After", caption: "After", pos: "left top", tags: ["Before & After", "Blonde"] },
+  { src: "assets/gallery/portfolio-08.jpg", alt: "Woman looking down with shoulder-length hair in warm blonde and light brown tones", caption: "", tags: ["Blonde"] },
+  { src: "assets/gallery/portfolio-09.jpg", alt: "Back view of long hair fading from brown roots to bright blonde ends", caption: "", tags: ["Blonde"] },
+  { src: "assets/gallery/portfolio-10.jpg", alt: "Side view of light blonde layered hair held up by the stylist", caption: "", tags: ["Blonde"] },
+  { src: "assets/gallery/portfolio-11.jpg", alt: "Young woman with smooth, long golden blonde hair parted at the side", caption: "", tags: ["Blonde"] },
+  { src: "assets/gallery/portfolio-12.jpg", alt: "Back view of dark roots blending into golden blonde ends by a window", caption: "", tags: ["Blonde", "Highlights"] },
+  { src: "assets/gallery/portfolio-13.jpg", alt: "Five before and after views of a vivid copper red color", caption: "Red head refresh!", tags: ["Red"] },
+  { src: "assets/gallery/portfolio-14.jpg", alt: "Side view of layered hair with dark roots and golden blonde highlights", caption: "", tags: ["Blonde", "Highlights"] },
+  { src: "assets/gallery/portfolio-15.jpg", alt: "Four views of layered hair with dark roots and soft blonde highlights", caption: "", tags: ["Blonde", "Highlights"] },
+  { src: "assets/gallery/portfolio-16.jpg", alt: "Two side views of long layered hair with honey blonde highlights", caption: "", tags: ["Blonde", "Highlights"] },
+  { src: "assets/gallery/portfolio-17.jpg", alt: "Close up of wavy hair with bright blonde highlights", caption: "", tags: ["Blonde", "Highlights"] }
 ];

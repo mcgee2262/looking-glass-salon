@@ -1,1 +1,1 @@
-Put approved client photos here, then list them in js/content.js (GALLERY).
+Portfolio photos copied from the owner's GlossGenius portfolio (with her permission). List each one in js/content.js (GALLERY).
