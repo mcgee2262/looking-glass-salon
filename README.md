@@ -24,7 +24,7 @@ Plain static HTML/CSS/JS. No build step. Booking stays on GlossGenius.
 Logo/brand, approved photos + alt text, bio, hours, address, phone/email, policies, social links, domain/hosting, analytics decision.
 
 ## Pictures
-All photos are Brandie's own work, copied from her GlossGenius portfolio with her permission (`assets/gallery/`). They were cropped from screenshots, so swap in the original files when available. There is no storybook artwork on the site.
+All photos are Brandie's own work, copied from her GlossGenius portfolio with her permission (`assets/gallery/`). `portfolio-01` to `17` were cropped from screenshots. `ryan-01` to `19` are the owner's original phone photos from the "mama ryan" folder, resized to 1400px with location and camera data removed. There is no storybook artwork on the site.
 
 ## Look
 Earthy palette: warm cream and pale wood, sage and moss greens, muted brass trim. No pink. Playfair Display headings, Pinyon Script for the signature. 3D touches: brass-lined cards and buttons, tilt on hover, a 3D brass hand mirror in the hero and a spinning mirror emblem above the footer.
