@@ -45,7 +45,7 @@
     var dep = /deposit/i.test(st.svc && st.svc.desc || "") ? '<p class="bk-dep">' + esc((/\$[\d.,]+ deposit[^.]*\./i.exec(st.svc.desc) || [""])[0] || "A deposit is required.") + '</p>' : "";
     sumBody.innerHTML = '<ul class="bk-lines">' + rows + '</ul>' +
       '<p class="bk-total"><span>Estimated total</span><strong>' + (from ? "from " : "") + "$" + total + '</strong></p>' +
-      '<p class="bk-muted">About ' + dur(mins) + '</p>' +
+      '<p class="bk-muted">About ' + dur(mins) + ' with ' + esc(window.SALON.owner.name) + '</p>' +
       (st.date ? '<p class="bk-when">' + fmtDate(st.date) + (st.time ? ' at ' + st.time : '') + '</p>' : '') + dep;
   }
 
@@ -148,7 +148,7 @@
 
   function stepDone() {
     panel.innerHTML = '<div class="bk-done"><div class="bk-seal" aria-hidden="true">✓</div><h2>You’re all set' + (st.who && st.who.name ? ', ' + esc(st.who.name.split(" ")[0]) : '') + '!</h2>' +
-      '<p>' + esc(st.svc.name) + ' on ' + fmtDate(st.date) + ' at ' + st.time + '.</p>' +
+      '<p>Brandie will see you for ' + esc(st.svc.name) + ' on ' + fmtDate(st.date) + ' at ' + st.time + '.</p>' +
       '<p class="bk-demo"><strong>Preview only.</strong> This is what clients would see. No appointment was made and nothing was sent.</p>' +
       '<p class="bk-next"><button type="button" class="btn big" data-reset>Start over</button></p></div>';
   }

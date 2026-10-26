@@ -133,9 +133,23 @@ footer strong{color:var(--ink)}
 .flash{position:absolute;inset:0;opacity:0;pointer-events:none;
   background:radial-gradient(circle at 50% 50%,#fff 0%,#fde3ec 45%,#f2a9c3 100%)}
 .other-side{position:absolute;inset:0;opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:0 20px;color:#3a1a33;background:linear-gradient(160deg,#fff,#fde3ec 60%,#f6bcd0);--flip:-1}
-.other-side .through{margin:0;font:italic 700 clamp(2rem,8vw,5rem)/1.05 Georgia,serif;transform:scaleX(var(--flip));transform-origin:center}
-.other-side .sub{margin:14px 0 22px;font:1.1rem system-ui,sans-serif;color:#5e3a52}
+  text-align:center;padding:0 20px;color:#3a1a33;background:radial-gradient(ellipse at 50% 45%,#fff 0%,#fdeef3 45%,#f8d3e0 100%);
+  pointer-events:none;transition:opacity .9s ease-out}
+.other-side.on{opacity:1;pointer-events:auto}
+/* the line starts mirrored, then turns once in 3D to read the right way */
+.other-side .through{margin:0;font:italic 500 clamp(2.4rem,7.5vw,5.6rem)/1.08 "Playfair Display",Georgia,serif;letter-spacing:-.01em;color:#3a1a33;
+  transform:perspective(1200px) rotateY(-180deg);opacity:0;
+  transition:transform 2.2s cubic-bezier(.45,0,.2,1) .2s,opacity 1s ease-out .2s}
+.other-side.on .through{transform:perspective(1200px) rotateY(0);opacity:1}
+.os-eyebrow{margin:0 0 14px;font:600 .85rem/1 system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-lo)}
+.os-rule{display:block;width:0;height:2px;margin:0 auto 26px;background:var(--gold-grad);transition:width 1.4s cubic-bezier(.22,1,.36,1) .1s}
+.other-side.on .os-rule{width:min(220px,50vw)}
+.other-side .os-eyebrow,.other-side .sub,.other-side .os-cta{opacity:0;transform:translateY(14px);transition:opacity .9s ease-out,transform 1.1s cubic-bezier(.22,1,.36,1)}
+.other-side.on .os-eyebrow{opacity:1;transform:none;transition-delay:.05s}
+.other-side.on .sub{opacity:1;transform:none;transition-delay:1.7s}
+.other-side.on .os-cta{opacity:1;transform:none;transition-delay:2s}
+.other-side .sub{margin:22px 0 28px;font:italic 1.2rem/1.5 "Playfair Display",Georgia,serif;color:#5e3a52}
+.other-side .os-cta{margin:0}
 .other-side .btn{--btn-bg:var(--plum);color:#fff}
 /* CSS mirror shows only if 3D cannot run */
 .css-mirror{display:none}
@@ -149,7 +163,9 @@ footer strong{color:var(--ink)}
 @media(prefers-reduced-motion:reduce){
   .hero3d{height:auto}.hero3d .stage{position:relative;height:auto;min-height:100svh}
   .hero3d .flash{display:none}.hero3d .cue{position:absolute;bottom:28px;left:0;right:0;text-align:center;margin:0;font:500 .95rem system-ui,sans-serif;color:var(--muted)}
-  .hero3d .other-side{position:relative;opacity:1!important;margin-top:60vh;padding:48px 20px;--flip:1!important}
+  .hero3d .other-side{position:relative;opacity:1!important;margin-top:60vh;padding:48px 20px;pointer-events:auto}
+  .hero3d .other-side *{transition:none!important;opacity:1!important;transform:none!important}
+  .hero3d .other-side .os-rule{width:min(220px,50vw)}
   .hero3d .other-side .through{transform:none}
 }
 
@@ -313,3 +329,18 @@ dialog#lightbox button:not(.close){border:2px solid transparent;background:linea
   animation:seal-in .6s cubic-bezier(.2,1.4,.4,1) both}
 @keyframes seal-in{from{transform:scale(.3) rotateY(180deg);opacity:0}to{transform:none;opacity:1}}
 @media(prefers-reduced-motion:reduce){.bk-seal{animation:none}}
+
+
+/* ---- classic type: Playfair Display headings, thin gold accent instead of block extrusion ---- */
+h1,h2,h3,.brand,.line strong,.svc-price,.wordmark h1,.bk-total strong,.ph strong{font-family:"Playfair Display",Georgia,"Times New Roman",serif}
+h1,h2,h3{font-weight:500;letter-spacing:-.015em;line-height:1.06}
+.phero h1,.steps h3,.close h2,.split h2,.bk-title{font-weight:500;letter-spacing:-.02em;text-shadow:.025em .03em 0 rgba(217,180,90,.55)}
+.steps h3{font-style:italic;font-weight:400;line-height:1}
+.phero h1::after,.close h2::after,.bk-title::after{content:"";display:block;width:min(160px,40%);height:2px;margin-top:.28em;background:var(--gold-grad)}
+.line strong{font-weight:600;letter-spacing:0}
+.svc-card h3{font-weight:600;letter-spacing:-.005em}
+.svc-price{font-weight:600}
+.wordmark h1{font-weight:600;letter-spacing:.04em}
+.brand{font-weight:600;font-size:1.3rem;letter-spacing:0;display:inline-flex;flex-direction:column;line-height:1.05}
+.brand-by{font:italic 400 .82rem/1.2 "Playfair Display",Georgia,serif;color:var(--gold-lo);letter-spacing:.02em;margin-top:2px}
+.sig{margin:4px 0 0;font:2.6rem/1 "Pinyon Script","Brush Script MT",cursive;color:var(--gold-lo);text-shadow:0 1px 0 var(--gold-hi)}

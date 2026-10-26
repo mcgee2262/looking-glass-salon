@@ -8,7 +8,7 @@
 
   document.getElementById("site-header").innerHTML =
     '<a class="skip" href="#main">Skip to content</a>' +
-    '<div class="bar"><a class="brand" href="index.html">' + esc(S.name) + '</a>' +
+    '<div class="bar"><a class="brand" href="index.html">' + esc(S.name) + '<span class="brand-by">by ' + esc(S.owner.name) + '</span></a>' +
     '<button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>' +
     '<nav id="nav" aria-label="Main">' + nav.map(function(n){
       return '<a href="'+n[0]+'"'+(n[0].indexOf(page)===0?' aria-current="page"':'')+'>'+n[1]+'</a>';
@@ -18,7 +18,7 @@
 
 var CREDITS = [["Alice through the looking glass", "https://commons.wikimedia.org/wiki/File:Alice_through_the_looking_glass.jpg"], ["Alice in the train carriage", "https://commons.wikimedia.org/wiki/File:Through_the_Looking_Glass_Gentleman_dressed_in_paper.png"], ["Alice and the White King", "https://commons.wikimedia.org/wiki/File:The_king_from_Through_the_Looking-Glass,_and_What_Alice_Found_There.jpg"], ["1907 edition page", "https://commons.wikimedia.org/wiki/File:Through_the_looking-glass_and_what_Alice_found_there_1907_(142075691).jpg"], ["Alice and the White Queen", "https://commons.wikimedia.org/wiki/File:Alice_and_white_queen.jpg"], ["Alice with the White Queen", "https://commons.wikimedia.org/wiki/File:Alice_with_White_Queen_(Illustration_by_John_Tenniel).png"], ["Alice and the Red Queen", "https://commons.wikimedia.org/wiki/File:Alice_queen2.jpg"], ["Alice between the Queens", "https://commons.wikimedia.org/wiki/File:Alice_Red_Queen_White_Queen.jpg"]];
   document.getElementById("site-footer").innerHTML =
-    '<p><strong>' + esc(S.name) + '</strong> · ' + (S.location.city ? esc(S.location.city) : tbc) + '</p>' +
+    '<p><strong>' + esc(S.name) + '</strong> · ' + esc(S.owner.name) + ', ' + esc(S.owner.role.toLowerCase()) + ' · ' + (S.location.city ? esc(S.location.city) : tbc) + '</p>' +
     '<p><a href="'+S.bookingUrl+'">Book an appointment</a></p>' +
     '<p>Illustrations from <em>Through the Looking-Glass</em> by John Tenniel (1871) and a 1907 edition, all public domain, via Wikimedia Commons: ' +
     CREDITS.map(function (c) { return '<a href="' + c[1] + '">' + esc(c[0]) + '</a>'; }).join(", ") +

@@ -15,7 +15,8 @@ window.SALON = {
   email: null,
   hours: null,
   social: { instagram: null, facebook: null },
-  owner: { name: null, bio: null },
+  // bio left empty on purpose: Brandie is writing it herself.
+  owner: { name: "Brandie Ryan", nickname: "Mama Ryan", role: "Owner and stylist", bio: null },
   policies: { cancellation: null },
   domain: null
 };
