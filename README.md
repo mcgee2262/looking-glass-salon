@@ -23,11 +23,11 @@ Plain static HTML/CSS/JS. No build step. Booking stays on GlossGenius.
 ## Still needed from owner
 Logo/brand, approved photos + alt text, bio, hours, address, phone/email, policies, social links, domain/hosting, analytics decision.
 
-## Pictures and credits
-Illustrations are public-domain plates from *Through the Looking-Glass* (John Tenniel, 1871, and a 1907 edition) from Wikimedia Commons. They are decoration, not the salon's work. Sources and licences: `assets/credits.json` (shown in every page footer, built in `js/site.js`). Replace them with the owner's own approved photos when available.
+## Pictures
+All photos are Brandie's own work, copied from her GlossGenius portfolio with her permission (`assets/gallery/`). They were cropped from screenshots, so swap in the original files when available. There is no storybook artwork on the site.
 
-## Design pass
-Run with the taste-skill (`design-taste-frontend`). Flat tone steps instead of gradients and outlines, 18px body, one big title per page, entrance motion. The 3D hero keeps its gradients, gradient chrome wordmark and portal on purpose; the inspector flags those.
+## Look
+Earthy palette: warm cream and pale wood, sage and moss greens, muted brass trim. No pink. Playfair Display headings, Pinyon Script for the signature. 3D touches: brass-lined cards and buttons, tilt on hover, a 3D brass hand mirror in the hero and a spinning mirror emblem above the footer.
 
 ## Adding gallery photos
 1. Drop each approved photo in `assets/gallery/` (about 1200px on the long side, JPEG, under 300 KB).
