@@ -81,11 +81,61 @@ var CREDITS = [["Alice through the looking glass", "https://commons.wikimedia.or
 
   var gal = document.getElementById("gallery");
   if (gal) {
-    gal.innerHTML = window.GALLERY.map(function(g){
-      return '<figure class="rv">' + (g.src ? '<img src="'+g.src+'" alt="'+esc(g.alt)+'" loading="lazy">' :
-        '<div class="ph" role="img" aria-label="Photo placeholder">Photo pending approval</div>') +
-        '<figcaption>'+esc(g.caption)+'</figcaption></figure>';
-    }).join("");
+    var gchips = document.getElementById("gchips");
+    var items = window.GALLERY;
+    var tags = [];
+    items.forEach(function (g) { (g.tags || []).forEach(function (t) { if (tags.indexOf(t) < 0) tags.push(t); }); });
+    var dlg = document.getElementById("lightbox"), cur = [], at = 0;
+    function tile(g, i) {
+      var cap = g.caption ? '<figcaption>' + esc(g.caption) + '</figcaption>' : '';
+      var tg = esc((g.tags || []).join("|"));
+      if (!g.src) {
+        return '<figure class="rv" data-tags="' + tg + '"><div class="ph" role="img" aria-label="Photo coming soon"><strong>' + esc((g.tags || ["Photo"])[0]) + '</strong><span>Photo coming soon</span></div>' + cap + '</figure>';
+      }
+      return '<figure class="rv" data-tags="' + tg + '"><button type="button" class="tile" data-i="' + i + '" aria-label="Enlarge photo' +
+        (g.caption ? ': ' + esc(g.caption.slice(0, 60)) : '') + '"><img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" decoding="async"></button>' + cap + '</figure>';
+    }
+    function showGallery(tag) {
+      cur = items.filter(function (g) { return tag === "All" || (g.tags || []).indexOf(tag) >= 0; });
+      gal.innerHTML = cur.map(function (g) { return tile(g, items.indexOf(g)); }).join("");
+      gal.querySelectorAll(".rv").forEach(function (f) { f.classList.add("in", "done"); });
+      if (gchips) gchips.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.tag === tag); });
+    }
+    if (gchips) {
+      gchips.innerHTML = ["All"].concat(tags).map(function (t) {
+        return '<button type="button" data-tag="' + esc(t) + '" aria-pressed="false">' + esc(t) + '</button>';
+      }).join("");
+      gchips.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) showGallery(b.dataset.tag); });
+    }
+    showGallery("All");
+
+    // tap to enlarge: native dialog, Esc closes, arrow keys and buttons move between the photos shown
+    function open(i) {
+      var shown = cur.filter(function (g) { return g.src; });
+      var g = items[i]; at = shown.indexOf(g);
+      paint(shown);
+      if (!dlg.open) dlg.showModal();
+    }
+    function paint(shown) {
+      var g = shown[at];
+      dlg.querySelector("img").src = g.src; dlg.querySelector("img").alt = g.alt || "";
+      dlg.querySelector("figcaption").textContent = g.caption || "";
+      dlg.querySelector(".nav").hidden = shown.length < 2;
+    }
+    function step(d) {
+      var shown = cur.filter(function (g) { return g.src; });
+      at = (at + d + shown.length) % shown.length; paint(shown);
+    }
+    gal.addEventListener("click", function (e) { var b = e.target.closest(".tile"); if (b) open(+b.dataset.i); });
+    if (dlg) {
+      dlg.querySelector(".close").addEventListener("click", function () { dlg.close(); });
+      dlg.querySelector(".prev").addEventListener("click", function () { step(-1); });
+      dlg.querySelector(".next").addEventListener("click", function () { step(1); });
+      dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+      dlg.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") step(-1); else if (e.key === "ArrowRight") step(1);
+      });
+    }
   }
 
   document.querySelectorAll("[data-fact]").forEach(function(e){

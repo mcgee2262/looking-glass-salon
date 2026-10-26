@@ -169,3 +169,23 @@ footer strong{color:var(--ink)}
 .svc-card .svc-desc{margin:0}
 
 @media(max-width:700px){.bar>.btn{display:none}}
+
+/* gallery tiles and viewer */
+.tile{display:block;width:100%;padding:0;border:0;background:var(--step2);cursor:zoom-in;overflow:hidden}
+.tile img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.tile:hover img{transform:scale(1.04)}
+dialog#lightbox{border:0;padding:0;background:#0d080b;color:var(--ink);width:min(96vw,1100px);max-height:94vh}
+dialog#lightbox::backdrop{background:rgba(10,6,9,.88)}
+dialog#lightbox figure{margin:0;padding:12px 12px 72px}
+dialog#lightbox img{max-height:76vh;width:auto;max-width:100%;margin-inline:auto;object-fit:contain}
+dialog#lightbox figcaption{margin:12px auto 0;max-width:40em;text-align:center;font-size:1rem;color:var(--muted)}
+dialog#lightbox button{min-height:44px;padding:0 20px;border:0;border-radius:999px;background:var(--accent);color:var(--accent-ink);font:700 1rem system-ui,sans-serif;cursor:pointer}
+dialog#lightbox .close{position:absolute;top:12px;right:12px;background:var(--step2);color:var(--ink)}
+dialog#lightbox .nav{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:12px}
+dialog#lightbox .nav[hidden]{display:none}
+
+.ph{align-content:center;gap:6px}
+.ph strong{font:800 clamp(1.5rem,3vw,2.2rem)/1 system-ui,sans-serif;letter-spacing:-.03em;color:var(--ink)}
+@media(max-width:600px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ph{aspect-ratio:1/1}}
+@media(max-width:600px){.ph{padding:20px}.ph strong{font-size:1.3rem;overflow-wrap:anywhere}}
+.grid figure{margin:0}

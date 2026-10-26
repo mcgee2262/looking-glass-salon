@@ -73,11 +73,17 @@ window.SERVICES = [
   ]}
 ];
 
-// Gallery: public captions from the existing portfolio. No images copied
-// (usage rights unconfirmed). Add files to assets/ and set src + alt when approved.
+// Gallery: real photos go in assets/gallery/. For each one set src, alt (what the photo shows,
+// for screen readers), caption (optional) and tags. A null src shows a "Photo coming soon" tile.
+// Only add photos the owner approved and the client agreed to share. Tags become the filter chips.
+// Captions below are the public ones from the existing GlossGenius portfolio; no photos copied.
 window.GALLERY = [
-  { src: null, alt: "", caption: "Red head refresh!" },
-  { src: null, alt: "", caption: "Beautiful sun kissed highlights with dimensional root shadowing." },
-  { src: null, alt: "", caption: "Honey gloss over faded highlights to richen the color and give shine and improved health to the hair." },
-  { src: null, alt: "", caption: "Blonde refresh with a mix of highlights and grey blending color." }
+  { src: null, alt: "", caption: "Red head refresh!", tags: ["Color", "Red"] },
+  { src: null, alt: "", caption: "Beautiful sun kissed highlights with dimensional root shadowing.", tags: ["Highlights"] },
+  { src: null, alt: "", caption: "Honey gloss over faded highlights to richen the color and give shine and improved health to the hair.", tags: ["Color", "Blonde"] },
+  { src: null, alt: "", caption: "Blonde refresh with a mix of highlights and grey blending color.", tags: ["Highlights", "Blonde"] },
+  { src: null, alt: "", caption: "", tags: ["Cuts"] },
+  { src: null, alt: "", caption: "", tags: ["Extensions"] },
+  { src: null, alt: "", caption: "", tags: ["Smoothing"] },
+  { src: null, alt: "", caption: "", tags: ["Balayage"] }
 ];

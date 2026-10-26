@@ -17,3 +17,9 @@ Illustrations are public-domain plates from *Through the Looking-Glass* (John Te
 
 ## Design pass
 Run with the taste-skill (`design-taste-frontend`). Flat tone steps instead of gradients and outlines, 18px body, one big title per page, entrance motion. The 3D hero keeps its gradients, gradient chrome wordmark and portal on purpose; the inspector flags those.
+
+## Adding gallery photos
+1. Drop each approved photo in `assets/gallery/` (about 1200px on the long side, JPEG, under 300 KB).
+2. In `js/content.js`, edit a `GALLERY` entry: set `src` (for example `assets/gallery/red-refresh.jpg`), `alt` (what the photo shows), an optional `caption`, and `tags`.
+3. Tags become the filter chips on the Gallery page. Entries with `src: null` show a "Photo coming soon" tile.
+Only publish photos the owner approved and the client agreed to share.
