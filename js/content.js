@@ -4,8 +4,10 @@
 window.SALON = {
   name: "Looking Glass Salon",
   tagline: "Hair color, cuts and smoothing treatments",
-  // One booking URL for every "Book" button. Booking happens on GlossGenius.
-  bookingUrl: "https://brandieryan.glossgenius.com/book",
+  // One booking URL for every "Book" button. Points at the booking preview (book.html) for now.
+  bookingUrl: "book.html",
+  // Her live GlossGenius booking page, kept for when the preview is replaced or switched back.
+  glossGeniusUrl: "https://brandieryan.glossgenius.com/book",
   existingSiteUrl: "https://brandieryan.glossgenius.com/portfolio",
   // null = unknown. Pages show a "to be confirmed" note instead of a fake value.
   location: { city: "Sterling, VA", address: null, parking: null, review: true },
