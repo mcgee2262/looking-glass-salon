@@ -41,3 +41,8 @@ Only publish photos the owner approved and the client agreed to share.
 - Studio tour: `assets/studio/`. Brandie's photo: `assets/brandie.jpg`.
 - Video loops: `assets/video/*.mp4` with `.jpg` posters. Six seconds, silent, about 1.8 MB each. They load and play only when scrolled near. Make more with the same settings (640x480 preset, audio removed).
 - Originals stay in the owner's folder; they are not in this repo.
+
+## Higgsfield images (Phase 2)
+- `assets/hero/`: three of Brandie's own photos upscaled to 2K with Higgsfield (`hero-blonde`, `hero-copper`, `hero-bob`). The hair is unchanged, only sharper.
+- `assets/art/`: AI-generated still lifes of salon tools (flat lay, mirrors, swatch fan, tray, plaster wall, ribbons) made with Higgsfield `gpt_image_2_5` at 2K, high quality. Palette: sage, pale oak, brass, cream. These are brand art, **not photos of the salon**; the footer says so. Never use AI images to show hair results.
+- `ribbons.jpg` and `plaster.jpg` are spare backgrounds for later.

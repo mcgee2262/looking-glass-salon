@@ -18,7 +18,8 @@
 
   document.getElementById("site-footer").innerHTML =
     '<p><strong>' + esc(S.name) + '</strong> · ' + esc(S.owner.name) + ', ' + esc(S.owner.role.toLowerCase()) + ' · ' + (S.location.city ? esc(S.location.city) : tbc) + '</p>' +
-    '<p><a href="'+S.bookingUrl+'">Book an appointment</a> <a class="old-site" href="'+S.oldSiteUrl+'" target="_blank" rel="noopener">Old website <span aria-hidden="true">\u2197</span></a></p>';
+    '<p><a href="'+S.bookingUrl+'">Book an appointment</a> <a class="old-site" href="'+S.oldSiteUrl+'" target="_blank" rel="noopener">Old website <span aria-hidden="true">\u2197</span></a></p>' +
+    '<p class="fine">Still-life pictures of salon tools (shears, mirrors, swatches) are AI-generated brand art, not photos of the salon. Hair photos are Brandie\u2019s own work.</p>';
 
   var fb = document.createElement("a");
   fb.className = "btn float-book"; fb.textContent = "Book"; fb.href = S.bookingUrl;
