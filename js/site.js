@@ -42,11 +42,10 @@ var CREDITS = [["Alice through the looking glass", "https://commons.wikimedia.or
   if (el) {
     var chips = document.getElementById("chips");
     function card(s) {
-      var url = s.url || S.bookingUrl;
       return '<article class="svc-card"><h3>' + esc(s.name) + '</h3>' +
         '<div class="svc-top"><span class="svc-price">' + esc(s.price || "") + '</span>' +
         (s.duration ? '<span class="svc-time">' + s.duration + ' min</span>' : '') +
-        '<a class="svc-book" href="' + esc(url) + '" target="_blank" rel="noopener" aria-label="Book ' + esc(s.name) + '">Book <span aria-hidden="true">\u2192</span></a></div>' +
+        '<a class="svc-book" href="book.html?s=' + all.indexOf(s) + '" aria-label="Book ' + esc(s.name) + '">Book <span aria-hidden="true">\u2192</span></a></div>' +
         (s.desc ? '<p class="svc-desc">' + esc(s.desc) + '</p>' : '') + '</article>';
     }
     var all = [];
