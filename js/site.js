@@ -93,7 +93,7 @@ var CREDITS = [["Alice through the looking glass", "https://commons.wikimedia.or
         return '<figure class="rv" data-tags="' + tg + '"><div class="ph" role="img" aria-label="Photo coming soon"><strong>' + esc((g.tags || ["Photo"])[0]) + '</strong><span>Photo coming soon</span></div>' + cap + '</figure>';
       }
       return '<figure class="rv" data-tags="' + tg + '"><button type="button" class="tile" data-i="' + i + '" aria-label="Enlarge photo' +
-        (g.caption ? ': ' + esc(g.caption.slice(0, 60)) : '') + '"><img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" decoding="async"></button>' + cap + '</figure>';
+        (g.caption ? ': ' + esc(g.caption.slice(0, 60)) : '') + '"><img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" decoding="async"' + (g.pos ? ' style="object-position:' + esc(g.pos) + '"' : '') + '></button>' + cap + '</figure>';
     }
     function showGallery(tag) {
       cur = items.filter(function (g) { return tag === "All" || (g.tags || []).indexOf(tag) >= 0; });
