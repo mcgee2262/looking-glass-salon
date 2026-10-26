@@ -24,7 +24,7 @@
 
   var all = [];
   window.SERVICES.forEach(function (g) { g.items.forEach(function (i) { i.cat = g.cat; all.push(i); }); });
-  var addOns = all.filter(function (s) { return s.cat === "Add-Ons"; });
+  var addOns = (window.ADDONS || []).map(function (a) { a.cat = "Add-Ons"; return a; });
 
   var st = { step: 1, cat: "All", svc: null, extras: [], date: null, time: null, who: null };
 

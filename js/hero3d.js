@@ -66,6 +66,7 @@
     { c0: 0x59381a, c1: 0xa87e42, lane: -0.90, ph: 5.2, sp: 0.55, amp: 0.16, z: -0.6, w: 0.34 },  // caramel
     { c0: 0x4a1d0c, c1: 0x93441f, lane:  0.88, ph: 2.4, sp: 0.47, amp: 0.15, z: -1.1, w: 0.32 }   // copper, thinner
   ].slice(0, small ? 4 : 6);
+  LOCKS.forEach(function (L2) { L2.cx = 0; L2.cy = 0; });
   var tmpc = new THREE.Color(), tmpd = new THREE.Color();
   LOCKS.forEach(function (L2, li) {
     var nv = HSTR * (HSEG + 1) * 2;
@@ -98,11 +99,14 @@
       + L2.amp * Math.sin(s * 6.0 + t * L2.sp + L2.ph) * (0.35 + 0.65 * Math.sin(Math.PI * Math.min(1, s * 1.1)))
       + 0.08 * Math.sin(s * 14 + t * L2.sp * 1.6 + L2.ph);
     var x = xn * HW, y = yn * HH, z = L2.z + 0.45 * Math.sin(s * 4 + L2.ph + t * 0.4);
-    var dx = x - cx, dy = y - cy, g = Math.exp(-(dx * dx + dy * dy) / 1.6);   // the strands part around the pointer
-    y += (dy >= 0 ? 1 : -1) * Math.min(Math.abs(dy) + 0.2, 0.9) * g * 0.9;
+    // the strands bow away from the pointer: a continuous push (no flip at the center) that fades smoothly with distance
+    var dx = x - L2.cx, dy = y - L2.cy, g = Math.exp(-(dx * dx + dy * dy) / 3.4);
+    y += (dy / Math.sqrt(dy * dy + 0.3)) * 0.8 * g;
+    z += 0.4 * g;
     out[0] = x; out[1] = y; out[2] = z;
   }
   function updateHair(t, cx, cy, grow) {
+    LOCKS.forEach(function (L2, i) { var lag = 0.03 + i * 0.01; L2.cx += (cx - L2.cx) * lag; L2.cy += (cy - L2.cy) * lag; });
     var hf = Math.min(1, HW / 3.6);   // thinner strands on narrow screens
     LOCKS.forEach(function (L2) {
       var pos = L2.mesh.geometry.attributes.position.array, nor = L2.mesh.geometry.attributes.normal.array;
@@ -159,7 +163,7 @@
   function frame(now) {
     var t = (now - t0) / 1000;
     var intro = reduce ? 1 : Math.min(1, t / 2.6); intro = intro * intro * (3 - 2 * intro);
-    nx += (tx - nx) * 0.06; ny += (ty - ny) * 0.06;
+    nx += (tx - nx) * 0.05; ny += (ty - ny) * 0.05;
     updateHair(t, nx * HW * 0.8, -ny * HH * 0.8, 0.35 + 0.65 * intro);
     lamp.position.set(nx * 3.8, -ny * 2.6, 3);
     renderer.render(scene, camera);

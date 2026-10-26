@@ -56,3 +56,10 @@ Only publish photos the owner approved and the client agreed to share.
 - **Hover:** the gold glare on cards, photos and tiles is gone. The tilt motion stays.
 - **Booking images:** `assets/book/` has one AI-made still life per service category (consultation, color, highlights, add-ons, smoothing, extensions), used on the booking page. They show tools, not hair results.
 - **3D tour:** `js/tour3d.js` on the Visit page. A simple 3D model of the studio, six stops, each showing a real photo. The 3D room is an illustration; the layout is simplified. Edit `STOPS` to change stops or captions.
+
+## Round 5 changes
+- **Fonts:** Cormorant Garamond (headings, wordmark, signature) and Jost (everything else). Loaded from Google Fonts in each page head.
+- **Logo:** `assets/logo.svg` (brass hand mirror with an LG monogram). Also the favicon (`assets/favicon.svg`) and the header mark.
+- **Services:** 18 on the site (`SERVICES` in `js/content.js`). The "+ Cut/Style" prices are folded into each card's text. Add-ons live in `ADDONS` and only show in the booking Extras step. Everything removed is kept in `MORE_SERVICES`.
+- **Hair:** the cursor push is continuous and each lock follows the pointer with its own soft lag.
+- **3D tour (`js/tour3d.js`):** real window openings with the sun casting window-frame shadows across an oak floor, ACES tone mapping, environment reflections, procedural oak/plaster/rug textures, detailed chairs, mirrors, shampoo bowls, lounge and desk, fake contact shadows, soft sunbeams, and a slow film-style camera. For a photo-real version, scan the studio (Polycam or Luma) or shoot 360 photos and replace the model.
