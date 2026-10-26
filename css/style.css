@@ -47,10 +47,15 @@ body[data-page="index"] main>.cards{padding-bottom:16px}
 .hero3d .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
   background:radial-gradient(ellipse at 50% 40%,#3a1a33 0%,#140d12 70%)}
 .hero3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.wordmark{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-  padding:0 8px;will-change:transform,opacity;--shine:50%}
+.wordmark{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;
+  padding:0 6vw;max-width:58%;will-change:transform,opacity;--shine:50%;transform-origin:left center;animation:wm-in 1.4s .3s backwards ease-out}
+.hero3d.tall .wordmark{max-width:none;align-items:center;justify-content:flex-start;text-align:center;padding:clamp(70px,13vh,130px) 8px 0;transform-origin:center top}
+@keyframes wm-in{from{opacity:0;filter:blur(8px)}to{opacity:1;filter:none}}
 .wordmark h1{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800;letter-spacing:-.03em;
-  font-size:clamp(2.6rem,13.5vw,9.5rem);line-height:.95}
+  font-size:clamp(2.6rem,9vw,8.5rem);line-height:.95}
+.wordmark .chrome{display:block}
+.hero3d.tall .wordmark h1{font-size:clamp(2.6rem,15vw,6rem)}
+.hero3d.tall .wordmark .chrome{display:inline}
 .chrome{display:inline-block;color:transparent;-webkit-background-clip:text;background-clip:text;
   background-image:linear-gradient(105deg,#6c6670 0%,#f4f1f5 18%,#9a8f9c 32%,#e7b9ae 46%,#fff 54%,#a0507a 68%,#e9d9e1 82%,#7d7280 100%);
   background-size:260% 100%;background-position:var(--shine) 50%;
