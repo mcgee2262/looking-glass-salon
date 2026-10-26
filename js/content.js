@@ -80,6 +80,11 @@ window.SERVICES = [
 // for screen readers), caption (optional) and tags. A null src shows a "Photo coming soon" tile.
 // Optional pos sets which part of the photo shows in the square tile (default center). Tags become the filter chips. Photos below are from the owner's GlossGenius portfolio, used with her permission.
 window.GALLERY = [
+  { src: "assets/gallery/silver-bob-before-after.jpg", alt: "Before and after of a chin-length bob: brassy pale blonde before, cool bright silver after", caption: "Brassy blonde to bright silver.", tags: ["Silver", "Before & After"] },
+  { src: "assets/gallery/silver-bob-portrait.jpg", alt: "Smiling woman with a sleek silver bob and side-swept bangs, with before views of the brassy blonde she started with", caption: "", tags: ["Silver", "Before & After", "Cuts"] },
+  { src: "assets/gallery/blonde-bob-highlights.jpg", alt: "Three views of a stacked bob with bangs and soft blonde highlights", caption: "", tags: ["Blonde", "Highlights", "Cuts"] },
+  { src: "assets/gallery/brunette-bob-caramel.jpg", alt: "Wavy brunette bob with caramel highlights, seen from the side", caption: "", tags: ["Brunette", "Highlights", "Cuts"] },
+  { src: "assets/gallery/braided-half-up.jpg", alt: "Half-up style with a Dutch braid across the crown and a fishtail braid down the back, over loose waves", caption: "", tags: ["Styling"] },
   { src: "assets/gallery/portfolio-01.jpg", alt: "Four before and after views of a blonde cut with soft, blended highlights", caption: "Blonde refresh with a mix of highlights and grey blending color.", tags: ["Blonde", "Highlights"] },
   { src: "assets/gallery/portfolio-02.jpg", alt: "Stylist lifting long brown hair with blonde highlights on a young woman looking down", caption: "", tags: ["Brunette", "Highlights"] },
   { src: "assets/gallery/portfolio-03.jpg", alt: "Back view of long brown hair with golden highlights", caption: "", tags: ["Brunette", "Highlights"] },
