@@ -46,3 +46,7 @@ Only publish photos the owner approved and the client agreed to share.
 - `assets/hero/`: three of Brandie's own photos upscaled to 2K with Higgsfield (`hero-blonde`, `hero-copper`, `hero-bob`). The hair is unchanged, only sharper.
 - `assets/art/`: AI-generated still lifes of salon tools (flat lay, mirrors, swatch fan, tray, plaster wall, ribbons) made with Higgsfield `gpt_image_2_5` at 2K, high quality. Palette: sage, pale oak, brass, cream. These are brand art, **not photos of the salon**; the footer says so. Never use AI images to show hair results.
 - `ribbons.jpg` and `plaster.jpg` are spare backgrounds for later.
+
+## Phase 3: 3D hair
+- **Hair locks in the hero** (`js/hero3d.js`, section "hair"): six locks of nine silky strands each, drawn in code in Brandie's real tones (honey, copper, ash blonde, espresso, caramel). They sweep in from the corners behind the mirror, part around the pointer, and shrink away during the portal dive. Phones get fewer, thinner strands. Edit `LOCKS` to change colors and lanes.
+- **Swatch ring** (`js/swatchring.js`, Gallery page "Find your shade"): a spinning 3D ring of 11 shades. Drag or tap to spin, it snaps to a shade, and "Show these photos" filters the gallery by that shade's tag (`SHADES` at the top of the file maps each shade to a gallery tag). The shade buttons under the ring are the keyboard and no-WebGL route.

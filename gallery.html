@@ -26,6 +26,18 @@
 <p class="rv">Drag the line across each photo to compare.</p>
 <div class="ba-row"><figure class="ba rv"><div class="ba-stage"><img class="ba-after" src="assets/ba/ba-01-after.jpg" width="534" height="1100" alt="After: long wavy brown hair with soft caramel highlights, back view" decoding="async"><img class="ba-before" src="assets/ba/ba-01-before.jpg" width="534" height="1100" alt="Before: long dark brown hair with chunky blonde streaks, back view" decoding="async"><span class="ba-tag l">Before</span><span class="ba-tag r">After</span><span class="ba-line"></span><span class="ba-knob" aria-hidden="true">&#8596;</span><input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after"></div><figcaption>Chunky blonde streaks on dark brown, then soft caramel highlights.</figcaption></figure><figure class="ba rv"><div class="ba-stage"><img class="ba-after" src="assets/ba/ba-02-after.jpg" width="534" height="1100" alt="After: long, wavy, vivid copper hair, back view" decoding="async"><img class="ba-before" src="assets/ba/ba-02-before.jpg" width="534" height="1100" alt="Before: long orange-brown hair, back view" decoding="async"><span class="ba-tag l">Before</span><span class="ba-tag r">After</span><span class="ba-line"></span><span class="ba-knob" aria-hidden="true">&#8596;</span><input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after"></div><figcaption>Dull orange-brown to bright, vivid copper.</figcaption></figure></div>
 </section>
+<section class="wrap sec-h shades" id="shades" aria-labelledby="shade-h">
+<h2 id="shade-h" class="rv">Find your shade</h2>
+<p class="rv">Spin the ring, pick a shade, then see Brandie's work in that color.</p>
+<div class="ring-wrap rv"><canvas tabindex="0" aria-label="A spinning ring of hair color swatches. Drag it, or use the left and right arrow keys, or the shade buttons below."></canvas></div>
+<div class="shade-bar rv">
+<button class="shade-prev" type="button" aria-label="Previous shade">&larr;</button>
+<div class="shade-info" aria-live="polite"><strong class="shade-name"></strong><span class="shade-count"></span></div>
+<button class="shade-next" type="button" aria-label="Next shade">&rarr;</button>
+<button class="btn shade-go" type="button">Show these photos</button>
+</div>
+<div class="shade-list rv" role="group" aria-label="Choose a shade"></div>
+</section>
 <section class="wrap" aria-label="Photos">
 <div id="gchips" class="chips" role="group" aria-label="Filter photos"></div>
 <div class="grid" id="gallery"></div>
@@ -39,5 +51,7 @@
 <footer id="site-footer"></footer>
 <script src="js/content.js"></script>
 <script src="js/site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/swatchring.js" defer></script>
 </body>
 </html>

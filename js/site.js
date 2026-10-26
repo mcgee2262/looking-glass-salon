@@ -93,6 +93,7 @@
       gchips.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) showGallery(b.dataset.tag); });
     }
     showGallery("All");
+    window.__galleryFilter = showGallery;
 
     // tap to enlarge: native dialog, Esc closes, arrow keys and buttons move between the photos shown
     function open(i) {
