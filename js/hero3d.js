@@ -36,9 +36,9 @@
   var envScene = new THREE.Scene();
   var envTex = canvasTex(1024, 512, function (g, w, h) {
     var v = g.createLinearGradient(0, 0, 0, h);
-    v.addColorStop(0, "#ffffff"); v.addColorStop(0.35, "#fbd9e5"); v.addColorStop(0.6, "#e9a0bb"); v.addColorStop(1, "#b0607f");
+    v.addColorStop(0, "#ffffff"); v.addColorStop(0.3, "#fff0c4"); v.addColorStop(0.55, "#f2a9c3"); v.addColorStop(0.8, "#d9b45a"); v.addColorStop(1, "#8a6a2a");
     g.fillStyle = v; g.fillRect(0, 0, w, h);
-    [[200, 150, 120, "rgba(255,255,255,.9)"], [620, 120, 150, "rgba(255,225,200,.8)"], [880, 250, 90, "rgba(255,255,255,.7)"],
+    [[200, 150, 120, "rgba(255,255,255,.9)"], [620, 120, 150, "rgba(255,230,160,.85)"], [880, 250, 90, "rgba(255,255,255,.7)"],
      [420, 330, 140, "rgba(230,130,170,.7)"]].forEach(function (b) {
       var r = g.createRadialGradient(b[0], b[1], 0, b[0], b[1], b[2]);
       r.addColorStop(0, b[3]); r.addColorStop(1, "rgba(0,0,0,0)");
@@ -57,8 +57,8 @@
   var plum = new THREE.PointLight(0xe98fb2, 1.2, 30); plum.position.set(-4, -2, 4); scene.add(plum);
 
   // ---- materials
-  var gold = new THREE.MeshStandardMaterial({ color: 0xd99a90, metalness: 1, roughness: 0.2, envMap: envMap, envMapIntensity: 1.25 });
-  var bead = new THREE.MeshStandardMaterial({ color: 0xf0c7a8, metalness: 1, roughness: 0.15, envMap: envMap, envMapIntensity: 1.4 });
+  var gold = new THREE.MeshStandardMaterial({ color: 0xe6b84f, metalness: 1, roughness: 0.2, envMap: envMap, envMapIntensity: 1.25 });
+  var bead = new THREE.MeshStandardMaterial({ color: 0xf7de92, metalness: 1, roughness: 0.15, envMap: envMap, envMapIntensity: 1.4 });
 
   // glass: fake reflection, with the wordmark written backwards like a real mirror
   var glassTex = canvasTex(512, 512, function (g, w, h) {
@@ -92,15 +92,15 @@
 
   var backTex = canvasTex(512, 512, function (g, w, h) {
     var r = g.createRadialGradient(w * .4, h * .35, 20, w / 2, h / 2, w * .55);
-    r.addColorStop(0, "#f3cdb8"); r.addColorStop(0.6, "#d4938c"); r.addColorStop(1, "#a8606c");
+    r.addColorStop(0, "#fbeab0"); r.addColorStop(0.6, "#d9b45a"); r.addColorStop(1, "#a07a2c");
     g.fillStyle = r; g.fillRect(0, 0, w, h);
     g.save(); g.translate(w / 2, h / 2); g.scale(1, 1 / 1.3);
-    g.strokeStyle = "rgba(90,35,55,.55)"; g.lineWidth = 3;
+    g.strokeStyle = "rgba(110,72,18,.6)"; g.lineWidth = 3;
     [210, 196, 150].forEach(function (rad) { g.beginPath(); g.arc(0, 0, rad, 0, 6.2832); g.stroke(); });
-    for (var i = 0; i < 48; i++) { var a = i / 48 * 6.2832; g.beginPath(); g.arc(Math.cos(a) * 173, Math.sin(a) * 173, 4, 0, 6.2832); g.fillStyle = "rgba(90,35,55,.55)"; g.fill(); }
+    for (var i = 0; i < 48; i++) { var a = i / 48 * 6.2832; g.beginPath(); g.arc(Math.cos(a) * 173, Math.sin(a) * 173, 4, 0, 6.2832); g.fillStyle = "rgba(110,72,18,.6)"; g.fill(); }
     g.textAlign = "center"; g.textBaseline = "middle"; g.font = "italic 700 190px Georgia, serif";
     g.fillStyle = "rgba(255,235,225,.6)"; g.fillText("LG", -3, -3);
-    g.fillStyle = "rgba(90,35,55,.8)"; g.fillText("LG", 0, 0);
+    g.fillStyle = "rgba(110,72,18,.85)"; g.fillText("LG", 0, 0);
     g.restore();
   });
 
@@ -110,7 +110,7 @@
   var face = new THREE.Group(); face.scale.set(1, 1.3, 1);
   var ring = new THREE.Mesh(new THREE.TorusGeometry(1, 0.1, 24, seg), gold);
   var inner = new THREE.Mesh(new THREE.TorusGeometry(0.965, 0.022, 12, seg),
-    new THREE.MeshBasicMaterial({ color: 0xffe3d2, transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false }));
+    new THREE.MeshBasicMaterial({ color: 0xffe9a8, transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false }));
   inner.position.z = 0.03;
   var glass = new THREE.Mesh(new THREE.CircleGeometry(0.97, seg), new THREE.MeshBasicMaterial({ map: glassTex }));
   glass.position.z = 0.01;
@@ -172,10 +172,25 @@
     }
     var g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
     return new THREE.Points(g, new THREE.PointsMaterial({ map: starTex, size: 0.32, transparent: true, depthWrite: false,
-      color: 0xd9709b }));
+      color: 0xd9a52e }));
   }
   var spA = sparkles(small ? 10 : 18, 0), spB = sparkles(small ? 10 : 18, 2.1);
   rig.add(spA, spB);
+
+  // gold orbiters: tilted rings and floating gems that circle the mirror
+  var orb = new THREE.Group(); rig.add(orb);
+  var orbGold = new THREE.MeshStandardMaterial({ color: 0xe6b84f, metalness: 1, roughness: 0.18, envMap: envMap, envMapIntensity: 1.3 });
+  [[2.05, 0.9, 0.2], [2.45, -0.7, 0.9]].forEach(function (d) {
+    var rg = new THREE.Mesh(new THREE.TorusGeometry(d[0], 0.022, 10, small ? 64 : 120), orbGold);
+    rg.rotation.x = Math.PI / 2 + d[1]; rg.rotation.y = d[2]; orb.add(rg);
+  });
+  var gems = [];
+  for (var gi = 0; gi < (small ? 5 : 8); gi++) {
+    var gm = new THREE.Mesh(new THREE.OctahedronGeometry(0.1 + (gi % 3) * 0.035, 0),
+      gi % 3 === 1 ? new THREE.MeshStandardMaterial({ color: 0xf08fb5, metalness: 0.4, roughness: 0.1, envMap: envMap, envMapIntensity: 1.4, flatShading: true }) : orbGold);
+    gm.userData = { a: gi / (small ? 5 : 8) * Math.PI * 2, r: 2.0 + (gi % 3) * 0.25, y: ((gi * 37) % 10 - 5) * 0.2, sp: 0.25 + (gi % 4) * 0.06 };
+    orb.add(gm); gems.push(gm);
+  }
 
   // ---- input: mouse or phone tilt, both give nx, ny in [-1, 1]
   var nx = 0, ny = 0, tx = 0, ty = 0, tiltOn = false;
@@ -263,6 +278,13 @@
     spB.material.opacity = 0.5 + 0.5 * Math.sin(t * 1.7 + 3.14);
     spA.rotation.y = t * 0.08; spB.rotation.y = -t * 0.06;
     spA.visible = spB.visible = calm > 0.05;
+    orb.visible = calm > 0.05;
+    orb.rotation.y = t * 0.12; orb.rotation.x = nx * 0.15; orb.rotation.z = ny * 0.1;
+    gems.forEach(function (gm, k) {
+      var u = gm.userData, a = u.a + t * u.sp;
+      gm.position.set(Math.cos(a) * u.r, u.y + Math.sin(t * 0.8 + k) * 0.12, Math.sin(a) * u.r);
+      gm.rotation.x = t * 0.9 + k; gm.rotation.y = t * 0.7;
+    });
     camera.position.z = START_Z + (END_Z - START_Z) * dive;
     lamp.position.set(nx * 3.8, -ny * 2.6, 3);
     glassTex.offset.set(0.09 + nx * 0.06, 0.09 - ny * 0.06);
