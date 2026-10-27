@@ -63,3 +63,6 @@ Only publish photos the owner approved and the client agreed to share.
 - **Services:** 18 on the site (`SERVICES` in `js/content.js`). The "+ Cut/Style" prices are folded into each card's text. Add-ons live in `ADDONS` and only show in the booking Extras step. Everything removed is kept in `MORE_SERVICES`.
 - **Hair:** the cursor push is continuous and each lock follows the pointer with its own soft lag.
 - **3D tour (`js/tour3d.js`):** real window openings with the sun casting window-frame shadows across an oak floor, ACES tone mapping, environment reflections, procedural oak/plaster/rug textures, detailed chairs, mirrors, shampoo bowls, lounge and desk, fake contact shadows, soft sunbeams, and a slow film-style camera. For a photo-real version, scan the studio (Polycam or Luma) or shoot 360 photos and replace the model.
+
+## Service pictures
+Each of the 18 services (and the 7 add-ons) has its own picture in `assets/book/svc/`, mapped by service name in `SVC_IMG` at the top of `js/book.js`. Almost all are crops of Brandie's own client photos. Two are AI still lifes of tools, because there is no client photo that shows them: `mens-cut.jpg` (clippers and comb) and `sew-in.jpg` (a hair weft and beads). To change one, replace the file or edit `SVC_IMG`.

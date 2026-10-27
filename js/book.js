@@ -6,16 +6,20 @@
   var steps = document.querySelectorAll(".bk-steps li");
   function esc(t) { var d = document.createElement("div"); d.textContent = t == null ? "" : t; return d.innerHTML; }
 
-  // category pictures: AI-made still lifes of the tools for each service (not photos of her work)
-  var PHOTO = {
-    "Consultation & Cuts": "assets/book/consult.jpg",
-    "Color": "assets/book/color.jpg",
-    "Highlights & Balayage": "assets/book/highlights.jpg",
-    "Add-Ons": "assets/book/addons.jpg",
-    "Smoothing Treatments": "assets/book/smoothing.jpg",
-    "Extensions": "assets/book/extensions.jpg"
+  // one photo per service: her clients' hair (and a few tool still lifes where no client photo can show the service)
+  var D = "assets/book/svc/";
+  var SVC_IMG = {
+    "Consultation": "consultation", "Women's Haircut & Blow Dry/Style": "womens-cut", "Men's Haircut": "mens-cut",
+    "Children's Cut (10 & under)": "childrens-cut", "Shampoo & Blow Dry/Style": "shampoo-blowdry",
+    "Color Retouch & Style": "color-retouch", "All-Over Color & Style": "all-over-color", "Gloss/Toner": "gloss-toner",
+    "Partial Highlight + Style": "partial-highlight", "Full Highlight & Style": "full-highlight", "Face Frame Highlight & Style": "face-frame", "Balayage + Style": "balayage",
+    "Cezanne Keratin Express Treatment": "keratin-express", "Cezanne Keratin Smoothing Treatment": "keratin-smoothing", "Blonde Keratin Treatment": "blonde-keratin",
+    "Tape Extension Installation": "tape-install", "Tape Extension Move Up": "tape-moveup", "Sew-In Micro Weft Installation": "sew-in",
+    "Add On Full Highlights": "full-highlight", "Add On Face Frame Highlights": "face-frame", "Add On Partial Highlights": "partial-highlight",
+    "Add On Color Retouch": "color-retouch", "Extra Product Charge": "add-ons", "Conditioning Treatment": "gloss-toner", "Malibu Treatment": "add-ons"
   };
-
+  var PHOTO = { "Consultation & Cuts": D + "womens-cut.jpg", "Color": D + "all-over-color.jpg", "Highlights & Balayage": D + "balayage.jpg",
+    "Add-Ons": D + "add-ons.jpg", "Smoothing Treatments": D + "keratin-express.jpg", "Extensions": D + "tape-install.jpg" };
   var ICON = {
     "Add-Ons": '<path d="M24 6c6 9 12 15 12 22a12 12 0 0 1-24 0c0-7 6-13 12-22z"/>',
     "Smoothing Treatments": '<path d="M8 14c8-6 24 6 32 0M8 24c8-6 24 6 32 0M8 34c8-6 24 6 32 0" fill="none" stroke-width="3" stroke-linecap="round"/>',
@@ -32,7 +36,8 @@
   function plus(p) { return /\+/.test(p || ""); }
   function dur(m) { var h = Math.floor(m / 60), r = m % 60; return (h ? h + " hr" : "") + (h && r ? " " : "") + (r ? r + " min" : ""); }
   function thumb(s, cls) {
-    if (PHOTO[s.cat]) return '<div class="' + cls + '"><img src="' + PHOTO[s.cat] + '" alt="" decoding="async"></div>';
+    var src = SVC_IMG[s.name] ? D + SVC_IMG[s.name] + ".jpg" : PHOTO[s.cat];
+    if (src) return '<div class="' + cls + '"><img src="' + src + '" alt="" decoding="async"></div>';
     return '<div class="' + cls + ' bk-icon"><svg viewBox="0 0 48 48" aria-hidden="true">' + (ICON[s.cat] || ICON["Add-Ons"]) + '</svg></div>';
   }
   function chosen() { return [st.svc].concat(st.extras).filter(Boolean); }
