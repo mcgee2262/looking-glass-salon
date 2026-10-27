@@ -21,10 +21,11 @@
     '<p><a href="'+S.bookingUrl+'">Book an appointment</a> <a class="old-site" href="'+S.oldSiteUrl+'" target="_blank" rel="noopener">Old website <span aria-hidden="true">\u2197</span></a></p>' +
     '<p class="fine">Still-life pictures of salon tools and products (shears, mirrors, clippers, hair wefts) are AI-generated brand art, not photos of the salon. Hair photos are Brandie\u2019s own work.</p>';
 
-  var fb = document.createElement("a");
-  fb.className = "btn float-book"; fb.textContent = "Book"; fb.href = S.bookingUrl;
-  fb.setAttribute("aria-label", "Book an appointment");
-  document.body.appendChild(fb);
+  // the bar stays pinned; it gets slimmer once the page is scrolled
+  var bar = document.querySelector(".bar");
+  function onBar() { bar.classList.toggle("is-scrolled", (window.scrollY || 0) > 30); }
+  window.addEventListener("scroll", onBar, { passive: true }); onBar();
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { var nv = document.getElementById("nav"); if (nv.classList.contains("open")) { nv.classList.remove("open"); document.querySelector(".menu-btn").setAttribute("aria-expanded", "false"); } } });
 
   var btn = document.querySelector(".menu-btn"), n = document.getElementById("nav");
   btn.addEventListener("click", function(){

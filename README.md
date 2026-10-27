@@ -66,3 +66,6 @@ Only publish photos the owner approved and the client agreed to share.
 
 ## Service pictures
 Each of the 18 services (and the 7 add-ons) has its own picture in `assets/book/svc/`, mapped by service name in `SVC_IMG` at the top of `js/book.js`. Almost all are crops of Brandie's own client photos. Two are AI still lifes of tools, because there is no client photo that shows them: `mens-cut.jpg` (clippers and comb) and `sew-in.jpg` (a hair weft and beads). To change one, replace the file or edit `SVC_IMG`.
+
+## Sticky header
+The top bar (`.bar`, built in `js/site.js`) stays pinned on every page. After you scroll it gets slimmer (`is-scrolled`: smaller logo, no "by Brandie Ryan" line). On phones it shows the logo, a compact Book now button and a Menu button that drops the page links down under the bar. The floating Book pill is gone because Book is always in the bar. Jump links stop below the bar (`scroll-padding-top` in `css/style.css`), and the booking summary sits below it too.

@@ -485,3 +485,34 @@ nav a,.btn,.chips button,.svc-book,.bk-steps,.shade-list button{letter-spacing:.
 .tour-stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 55%,rgba(36,32,18,.3) 100%)}
 .tour-card,.tour-hint{z-index:2}
 @media(max-width:640px){.tour-stage::after{display:none}.tour-hint{top:10px;bottom:auto}}
+
+
+/* ---- sticky header: the bar stays at the top so people can switch pages from anywhere ---- */
+#site-header{display:contents}
+html{scroll-padding-top:84px}
+.bar{position:sticky;top:0;z-index:40;max-width:none;margin:0;background:var(--bg);
+  padding:14px max(var(--pad),calc((100% - 1440px)/2 + var(--pad)));
+  box-shadow:0 1px 0 var(--gold-lo),0 8px 20px -14px rgba(50,56,44,.4);transition:padding .25s ease}
+.bar .brand-mark{transition:height .25s ease}
+.bar.is-scrolled{padding-block:6px}
+.bar.is-scrolled .brand-mark{height:34px}
+.bar.is-scrolled .brand-by{display:none}
+.bk-sum{top:88px}
+.float-book{display:none!important}
+@media(max-width:700px){
+  .bar{flex-wrap:nowrap;gap:8px}
+  .bar .brand{margin-right:auto;min-width:0}
+  .bar>.btn{display:inline-flex;min-height:40px;padding:6px 16px;font-size:.95rem}
+  .menu-btn{display:block;min-height:40px;padding:0 14px}
+  nav{position:absolute;left:0;right:0;top:100%;order:0;width:auto;flex-direction:column;background:var(--bg);padding:8px var(--pad) 14px;box-shadow:0 1px 0 var(--gold-lo),0 16px 24px -14px rgba(0,0,0,.3)}
+  nav a{min-height:48px}
+  html{scroll-padding-top:72px}
+  .bk-sum{top:76px}
+}
+@media(prefers-reduced-motion:reduce){.bar,.bar .brand-mark{transition:none}}
+@media(max-width:700px){
+  .bar>.btn{white-space:nowrap;padding:6px 14px;font-size:.9rem;min-height:38px}
+  .bar .brand{font-size:1.1rem}
+  .bar .brand-by{display:none}
+  .bar .brand-mark{height:36px}
+}
