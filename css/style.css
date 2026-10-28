@@ -529,3 +529,10 @@ html{scroll-padding-top:84px}
 .hero3d:not(.tall) .wordmark{pointer-events:none}.hero3d:not(.tall) .wordmark a{pointer-events:auto}
 .hero3d:not(.tall) .wordmark h1{font-size:clamp(3.4rem,10.5vw,10rem)}
 .hero3d:not(.tall) .wordmark{max-width:56%}.hero3d:not(.tall) .salon{max-width:min(26em,100%)}
+
+/* Two steps side by side */
+.steps ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.steps li{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:10px}
+.steps .step-n{font:600 1rem "Jost",system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#5b5646)}
+.steps h3{font-size:clamp(2.2rem,7vw,7rem)}
+@media(max-width:760px){.steps ol{grid-template-columns:1fr 1fr}.steps li{padding:28px 18px}.steps h3{font-size:clamp(2rem,10vw,3.4rem)}}
