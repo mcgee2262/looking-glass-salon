@@ -176,7 +176,7 @@
     // the line eases toward the pointer instead of jumping, so it glides
     function step() {
       var t = +r.value, d = t - cur;
-      if (Math.abs(d) < 0.05) { cur = t; raf = 0; } else { cur += d * 0.2; raf = requestAnimationFrame(step); }
+      if (Math.abs(d) < 0.05) { cur = t; raf = 0; } else { cur += d * 0.14; raf = requestAnimationFrame(step); }
       paint();
     }
     function set() { if (calm) { cur = +r.value; paint(); } else if (!raf) raf = requestAnimationFrame(step); }
