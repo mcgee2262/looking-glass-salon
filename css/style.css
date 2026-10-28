@@ -628,3 +628,20 @@ dialog#lightbox button:not(.close){border:0;background:var(--accent)}
 .js .rv,.js .rv.in{opacity:1;transform:none;transition:none}
 .js .pic img,.js .pic.in img{transform:none;transition:none}
 @media(prefers-reduced-motion:reduce){.btn{transition:none}}
+
+
+/* ============================================================
+   Neutral palette: warm white and charcoal, no green or gold.
+   Change these values to recolor the whole site.
+   ============================================================ */
+:root{
+  --bg:#fbfaf8;--step1:#f4f2ee;--step2:#e9e6e0;--step3:#efece6;
+  --ink:#232323;--muted:#5c5a55;--accent:#2b2b2b;--accent-ink:#ffffff;
+  --cream:#ece9e3;--cream-ink:#232323;--plum:#2b2b2b;
+  --gold:#8a857b;--gold-lo:#6b675f;--gold-hi:#d8d4cc;
+  --gold-grad:linear-gradient(#8a857b,#8a857b);
+  --line:#e4e1da;--edge:#85817a
+}
+.bk-lines li{border-bottom-color:var(--line)}
+.bk-day[aria-pressed="true"] small{color:#e9e6e0}
+.bk-seal{background:var(--accent)}

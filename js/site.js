@@ -8,7 +8,7 @@
 
   document.getElementById("site-header").innerHTML =
     '<a class="skip" href="#main">Skip to content</a>' +
-    '<div class="bar"><a class="brand" href="index.html"><img class="brand-mark" src="assets/logo.svg" alt="" width="30" height="46"><span class="brand-text">' + esc(S.name) + '<span class="brand-by">by ' + esc(S.owner.name) + '</span></span></a>' +
+    '<div class="bar"><a class="brand" href="index.html"><img class="brand-mark" src="assets/logo-mono.svg" alt="" width="30" height="46"><span class="brand-text">' + esc(S.name) + '<span class="brand-by">by ' + esc(S.owner.name) + '</span></span></a>' +
     '<button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>' +
     '<nav id="nav" aria-label="Main">' + nav.map(function(n){
       return '<a href="'+n[0]+'"'+(n[0].indexOf(page)===0?' aria-current="page"':'')+'>'+n[1]+'</a>';

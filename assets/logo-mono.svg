@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 124" fill="none" role="img" aria-label="Looking Glass Salon">
+  <ellipse cx="40" cy="44" rx="31" ry="39" stroke="#8a857b" stroke-width="3.6"/>
+  <ellipse cx="40" cy="44" rx="26" ry="34" stroke="#b9b4aa" stroke-width="1.2"/>
+  <g stroke="#2b2b2b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24.5 28 V59 H38.5"/>
+    <path d="M62.5 35.5 C59 29 51 28 46.5 33.5 C41 40 42.5 53 50 58 C55.5 61.5 63 59 64 52 V46 H54"/>
+  </g>
+  <path d="M33.5 82 Q40 87 46.5 82 L44.6 109 Q40 116 35.4 109 Z" fill="#d8d4cc" stroke="#8a857b" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M35.6 94 H44.4 M36 101 H44" stroke="#8a857b" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="40" cy="118" r="4" fill="#8a857b" stroke="#8a857b" stroke-width="1.6"/>
+</svg>
