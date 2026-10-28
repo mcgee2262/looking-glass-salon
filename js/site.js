@@ -8,7 +8,7 @@
 
   document.getElementById("site-header").innerHTML =
     '<a class="skip" href="#main">Skip to content</a>' +
-    '<div class="bar"><a class="brand" href="index.html"><img class="brand-mark" src="assets/logo.svg" alt="" width="30" height="46"><span class="brand-text">' + esc(S.name) + '<span class="brand-by">by ' + esc(S.owner.name) + '</span></span></a>' +
+    '<div class="bar"><a class="brand" href="index.html"><img class="brand-mark" src="assets/logo-mono.svg" alt="" width="30" height="46"><span class="brand-text">' + esc(S.name) + '<span class="brand-by">by ' + esc(S.owner.name) + '</span></span></a>' +
     '<button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>' +
     '<nav id="nav" aria-label="Main">' + nav.map(function(n){
       return '<a href="'+n[0]+'"'+(n[0].indexOf(page)===0?' aria-current="page"':'')+'>'+n[1]+'</a>';
@@ -123,35 +123,6 @@
         if (e.key === "ArrowLeft") step(-1); else if (e.key === "ArrowRight") step(1);
       });
     }
-  }
-
-  // gold mirror emblem above the footer: stacked gold layers spin in real 3D
-  var foot = document.getElementById("site-footer");
-  if (foot) {
-    var em = document.createElement("div"); em.className = "emblem"; em.setAttribute("aria-hidden", "true");
-    var layers = "";
-    for (var li = -4; li <= 4; li++) layers += '<i class="rim" style="transform:translateZ(' + li * 1.6 + 'px)"></i>';
-    for (var lj = -3; lj <= 3; lj++) layers += '<i class="grip" style="transform:translateZ(' + lj * 1.4 + 'px)"></i>';
-    em.innerHTML = '<div class="emb"><div class="emb-in">' + layers +
-      '<i class="face" style="transform:translateZ(1px)"></i><i class="face" style="transform:rotateY(180deg) translateZ(1px)"></i></div></div>';
-    foot.parentNode.insertBefore(em, foot);
-  }
-
-  // 3D tilt with a gold glare on cards, photos and tiles
-  if (window.matchMedia("(hover:hover) and (pointer:fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    var TILT = ".svc-card,.fact,.pic,.tile";
-    document.addEventListener("pointermove", function (e) {
-      var c = e.target.closest && e.target.closest(TILT); if (!c) return;
-      var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-      var amp = r.width > 420 ? 5 : 10;
-      c.style.transform = "perspective(800px) rotateY(" + ((x - .5) * amp) + "deg) rotateX(" + ((.5 - y) * amp) + "deg) translateZ(0)";
-      c.style.setProperty("--mx", (x * 100) + "%"); c.style.setProperty("--my", (y * 100) + "%");
-      c.classList.add("is-tilting");
-    });
-    document.addEventListener("pointerout", function (e) {
-      var c = e.target.closest && e.target.closest(TILT);
-      if (c && !c.contains(e.relatedTarget)) { c.style.transform = ""; c.classList.remove("is-tilting"); }
-    });
   }
 
   document.querySelectorAll("[data-fact]").forEach(function(e){
