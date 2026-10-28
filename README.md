@@ -23,6 +23,8 @@ Plain static HTML/CSS/JS. No build step. Booking stays on GlossGenius.
 ## Still needed from owner
 Logo/brand, approved photos + alt text, bio, hours, address, phone/email, policies, social links, domain/hosting, analytics decision.
 
+`owner-form/` has a Google Form script that asks her for all of this plus a price check. Setup steps and a message to send her are in `owner-form/README.md`.
+
 ## Pictures
 All photos are Brandie's own work, copied from her GlossGenius portfolio with her permission (`assets/gallery/`). `portfolio-01` to `17` were cropped from screenshots. `ryan-01` to `19` are the owner's original phone photos from the "mama ryan" folder, resized to 1400px with location and camera data removed. There is no storybook artwork on the site.
 
