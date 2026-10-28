@@ -20,6 +20,9 @@ Plain static HTML/CSS/JS. No build step. Booking stays on GlossGenius.
 - Pages carry `noindex`. Remove it, add canonical, og:image and LocalBusiness JSON-LD after owner approval and domain pick.
 - No GlossGenius API/export/CRM work here. That is Phase 3 discovery.
 
+## Owner-only draft bar
+Clients no longer see the "DRAFT" bar. To see it, add `?preview` to any page link (like `index.html?preview`). It stays on for that browser tab. `?preview=off` turns it off. The bar text is in `js/site.js`.
+
 ## Still needed from owner
 Logo/brand, approved photos + alt text, bio, hours, address, phone/email, policies, social links, domain/hosting, analytics decision.
 

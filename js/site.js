@@ -4,6 +4,14 @@
   var S = window.SALON, page = document.body.dataset.page;
   var nav = [["index.html","Home"],["services.html","Services"],["gallery.html","Gallery"],["about.html","About"],["visit.html","Visit"]];
   function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML;}
+  // Owner-only draft bar: add ?preview to any page link. It sticks for the tab; ?preview=off clears it.
+  function isPreview(){
+    try {
+      var q = /[?&]preview(=([^&]*))?/.exec(location.search);
+      if (q) { if (q[2] === "off") sessionStorage.removeItem("lgPreview"); else sessionStorage.setItem("lgPreview", "1"); }
+      return sessionStorage.getItem("lgPreview") === "1";
+    } catch (e) { return !!/[?&]preview(?!=off)/.test(location.search); }
+  }
   var tbc = '<span class="tbc">To be confirmed</span>';
 
   document.getElementById("site-header").innerHTML =
@@ -14,7 +22,7 @@
       return '<a href="'+n[0]+'"'+(n[0].indexOf(page)===0?' aria-current="page"':'')+'>'+n[1]+'</a>';
     }).join("") + '</nav>' +
     '<a class="btn" href="'+S.bookingUrl+'">Book now</a></div>' +
-    '<p class="review-banner">DRAFT: content from the public GlossGenius page, awaiting owner review.</p>';
+    (isPreview() ? '<p class="review-banner">OWNER PREVIEW: content from the public GlossGenius page, awaiting owner review. Clients do not see this bar.</p>' : '');
 
   document.getElementById("site-footer").innerHTML =
     '<p><strong>' + esc(S.name) + '</strong> · ' + esc(S.owner.name) + ', ' + esc(S.owner.role.toLowerCase()) + ' · ' + (S.location.city ? esc(S.location.city) : tbc) + '</p>' +
