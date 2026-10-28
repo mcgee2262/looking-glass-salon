@@ -171,8 +171,16 @@
   // before/after slider: an invisible range input sits over the photos, so touch, mouse and keyboard all work
   document.querySelectorAll(".ba").forEach(function (b) {
     var r = b.querySelector("input[type=range]");
-    function set() { b.style.setProperty("--pos", r.value + "%"); }
-    r.addEventListener("input", set); set();
+    var cur = +r.value, raf = 0, calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function paint() { b.style.setProperty("--pos", cur.toFixed(2) + "%"); }
+    // the line eases toward the pointer instead of jumping, so it glides
+    function step() {
+      var t = +r.value, d = t - cur;
+      if (Math.abs(d) < 0.05) { cur = t; raf = 0; } else { cur += d * 0.2; raf = requestAnimationFrame(step); }
+      paint();
+    }
+    function set() { if (calm) { cur = +r.value; paint(); } else if (!raf) raf = requestAnimationFrame(step); }
+    r.step = "0.1"; r.addEventListener("input", set); paint();
   });
 
   // video loops: load and play only near the screen, pause when far away; reduced-motion users keep the poster
