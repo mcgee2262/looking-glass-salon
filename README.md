@@ -74,3 +74,6 @@ Each of the 18 services (and the 7 add-ons) has its own picture in `assets/book/
 
 ## Sticky header
 The top bar (`.bar`, built in `js/site.js`) stays pinned on every page. After you scroll it gets slimmer (`is-scrolled`: smaller logo, no "by Brandie Ryan" line). On phones it shows the logo, a compact Book now button and a Menu button that drops the page links down under the bar. The floating Book pill is gone because Book is always in the bar. Jump links stop below the bar (`scroll-padding-top` in `css/style.css`), and the booking summary sits below it too.
+
+## After you change a script or stylesheet
+GitHub Pages lets browsers keep each file for 10 minutes, so a visitor can briefly see a new page with an old script. Every `js/` and `css/` link in the HTML ends in `?v=<date>`. Change that tag in every page (search for the old one) whenever you edit a script or stylesheet.
