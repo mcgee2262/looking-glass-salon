@@ -36,12 +36,16 @@
   var bar = document.querySelector(".bar");
   function onBar() { bar.classList.toggle("is-scrolled", (window.scrollY || 0) > 30); }
   window.addEventListener("scroll", onBar, { passive: true }); onBar();
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { var nv = document.getElementById("nav"); if (nv.classList.contains("open")) { nv.classList.remove("open"); document.querySelector(".menu-btn").setAttribute("aria-expanded", "false"); } } });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && document.getElementById("nav").classList.contains("open")) { setMenu(false); document.querySelector(".menu-btn").focus(); } });
 
   var btn = document.querySelector(".menu-btn"), n = document.getElementById("nav");
-  btn.addEventListener("click", function(){
-    var open = n.classList.toggle("open"); btn.setAttribute("aria-expanded", open);
+  function setMenu(open) { n.classList.toggle("open", open); btn.setAttribute("aria-expanded", open); btn.textContent = open ? "Close" : "Menu"; }
+  btn.addEventListener("click", function(){ setMenu(!n.classList.contains("open")); });
+  // tapping anywhere else, or a link in the menu, closes it
+  document.addEventListener("click", function (e) {
+    if (n.classList.contains("open") && !n.contains(e.target) && !btn.contains(e.target)) setMenu(false);
   });
+  n.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
 
   document.querySelectorAll("[data-book]").forEach(function(a){
     a.href = S.bookingUrl;
@@ -180,7 +184,7 @@
   document.querySelectorAll(".ba").forEach(function (b) {
     var r = b.querySelector("input[type=range]");
     var cur = +r.value, raf = 0, calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    function paint() { b.style.setProperty("--pos", cur.toFixed(2) + "%"); }
+    function paint() { b.style.setProperty("--pos", cur.toFixed(2) + "%"); var v = Math.round(+r.value); r.setAttribute("aria-valuetext", v <= 2 ? "Showing the after photo" : v >= 98 ? "Showing the before photo" : v + " percent before, the rest after"); }
     // the line eases toward the pointer instead of jumping, so it glides
     function step() {
       var t = +r.value, d = t - cur;
@@ -194,10 +198,21 @@
   // video loops: load and play only near the screen, pause when far away; reduced-motion users keep the poster
   var calmVideo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var vids = Array.prototype.slice.call(document.querySelectorAll("video[data-src]"));
+  var vidsHeld = false;
+  var loopsBox = document.querySelector(".loops");
+  if (loopsBox && !calmVideo) {
+    var vbtn = document.createElement("button");
+    vbtn.type = "button"; vbtn.className = "btn alt vid-toggle"; vbtn.textContent = "Pause videos"; vbtn.setAttribute("aria-pressed", "false");
+    vbtn.addEventListener("click", function () {
+      vidsHeld = !vidsHeld; vbtn.setAttribute("aria-pressed", vidsHeld); vbtn.textContent = vidsHeld ? "Play videos" : "Pause videos";
+      if (vidsHeld) vids.forEach(function (v) { v.pause(); }); else checkVideos();
+    });
+    loopsBox.insertAdjacentElement("afterend", vbtn);
+  }
   function checkVideos() {
     var vh = window.innerHeight || 800;
     vids.forEach(function (v) {
-      if (calmVideo) return;
+      if (calmVideo || vidsHeld) return;
       var r = v.getBoundingClientRect(), near = r.bottom > -vh * 0.3 && r.top < vh * 1.3;
       if (near) {
         if (!v.getAttribute("src")) v.setAttribute("src", v.dataset.src);

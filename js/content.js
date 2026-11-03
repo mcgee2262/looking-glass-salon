@@ -56,17 +56,17 @@ window.SALON = {
 window.SERVICES = [
   { cat: "Consultation & Cuts", items: [
     {"name":"Consultation","price":"$0","duration":15,"desc":"For new guests who want to discuss service options to best suit their hair needs."},
-    {"name":"Women's Haircut & Blow Dry/Style","price":"$100+","duration":60},
-    {"name":"Men's Haircut","price":"$70+","duration":45},
-    {"name":"Children's Cut (10 & under)","price":"$60+","duration":45},
+    {"name":"Women's Haircut & Blow Dry/Style","price":"$100+","duration":60,"desc":"A haircut shaped to you, finished with a blow dry and style."},
+    {"name":"Men's Haircut","price":"$70+","duration":45,"desc":"A men's haircut, shaped and finished."},
+    {"name":"Children's Cut (10 & under)","price":"$60+","duration":45,"desc":"A haircut for children 10 and under."},
     {"name":"Shampoo & Blow Dry/Style","price":"$70+","duration":45,"desc":"A pampering shampoo and blow dry/style service."},
     {"name":"Bang Trim","price":"$20","duration":15,"desc":"A precise bang trim to keep your style on point.","cat":"Consultation & Cuts"},
-    {"name":"Perm + Cut/Style","price":"$230+","duration":145}
+    {"name":"Perm + Cut/Style","price":"$230+","duration":145,"desc":"A perm, with a cut and style."}
   ]},
   { cat: "Color", items: [
     {"name":"Color Retouch & Style","price":"$230+","duration":135,"desc":"Color gloss included unless specified. With a cut: $260+, 150 min."},
     {"name":"All-Over Color & Style","price":"$240+","duration":150,"desc":"With a cut: $300+, 180 min."},
-    {"name":"Gloss/Toner","price":"$70+","duration":45}
+    {"name":"Gloss/Toner","price":"$70+","duration":45,"desc":"Adds shine and fine-tunes the tone of your color."}
   ]},
   { cat: "Highlights & Balayage", items: [
     {"name":"Partial Highlight + Style","price":"$250","duration":165,"desc":"Gloss included unless specified. With a cut: $300+, 165 min."},
@@ -93,9 +93,9 @@ window.ADDONS = [
   {"name":"Add On Face Frame Highlights","price":"$90+","duration":30,"desc":"A little brightness around your face."},
   {"name":"Add On Partial Highlights","price":"$150+","duration":45,"desc":"Add a partial highlight onto a color retouch service."},
   {"name":"Add On Color Retouch","price":"$100+","duration":45,"desc":"A root touch-up added to another color service."},
-  {"name":"Extra Product Charge","price":"$30","duration":10},
-  {"name":"Conditioning Treatment","price":"$20","duration":10},
-  {"name":"Malibu Treatment","price":"$20","duration":10}
+  {"name":"Extra Product Charge","price":"$30","duration":10,"desc":"For extra product used during your service."},
+  {"name":"Conditioning Treatment","price":"$20","duration":10,"desc":"A conditioning treatment added to your service."},
+  {"name":"Malibu Treatment","price":"$20","duration":10,"desc":"A Malibu treatment added to your service."}
 ];
 
 // Not shown on the site (kept so nothing is lost): the less-requested services, plus the '+ cut' versions now folded into their cards.
