@@ -1,23 +1,53 @@
 // SINGLE SOURCE OF TRUTH for business details and services.
-// Everything marked review:true came from the public GlossGenius page
-// (scraped 2026-10-25) and is NOT yet owner-approved. Do not publish until reviewed.
+// Contact details, hours, policies, story and service edits came from Brandie's own form answers (2026-11-02).
+// Service prices and times were checked by her. A null value means we still do not have it: pages hide it.
 window.SALON = {
   name: "Looking Glass Salon",
   tagline: "Hair color, cuts and smoothing treatments",
-  // One booking URL for every "Book" button. Always the site's own booking page; never point Book buttons at GlossGenius.
+  // Every "Book" button goes to the site's own booking page. Its last step thanks the client, then sends them
+  // to glossGeniusBookUrl, where the real appointment is made (GlossGenius stays the system of record).
   bookingUrl: "book.html",
+  glossGeniusBookUrl: "https://brandieryan.glossgenius.com/book",
   // Her old GlossGenius site, linked from the footer "Old website" button for reference only.
   oldSiteUrl: "https://brandieryan.glossgenius.com/",
   existingSiteUrl: "https://brandieryan.glossgenius.com/portfolio",
-  // null = unknown. Pages show a "to be confirmed" note instead of a fake value.
-  location: { city: "Sterling, VA", address: null, parking: null, review: true },
-  phone: null,
-  email: null,
-  hours: null,
-  social: { instagram: null, facebook: null },
-  // bio left empty on purpose: Brandie is writing it herself.
-  owner: { name: "Brandie Ryan", nickname: "Mama Ryan", role: "Owner and stylist", bio: null },
-  policies: { cancellation: null },
+  location: {
+    city: "Sterling, VA",
+    address: "21430 Cedar Dr, Suite 214, Room 146, Sterling, VA 20164",
+    parking: "Looking Glass Salon is inside Blue Salon Suites, on the second floor of the building. Once you walk through the glass Blue Salon Suites doors, we are in Collection One: take the first left turn at the end of the hall."
+  },
+  phone: { display: "(571) 331-0304", tel: "+15713310304" },
+  email: "brandieryan1109@gmail.com",
+  // day, open/close shown to clients; open/close 24-hour numbers drive the booking times. null = closed.
+  hours: [
+    { day: "Monday", text: "10 am to 5 pm", open: 10, close: 17 },
+    { day: "Tuesday", text: "11 am to 7 pm", open: 11, close: 19 },
+    { day: "Wednesday", text: "11 am to 7 pm", open: 11, close: 19 },
+    { day: "Thursday", text: "11 am to 7 pm", open: 11, close: 19 },
+    { day: "Friday", text: "10 am to 5 pm", open: 10, close: 17 },
+    { day: "Saturday", text: "Closed", open: null, close: null },
+    { day: "Sunday", text: "Closed", open: null, close: null }
+  ],
+  // Instagram handle, TikTok handle (no @). Facebook is still missing: she only wrote her name, not a page link.
+  social: { instagram: "lookingglass.salon", tiktok: "looking.glass.salon", facebook: null },
+  owner: {
+    name: "Brandie Ryan", nickname: "Mama Ryan", role: "Owner and stylist",
+    years: "25 years behind the chair",
+    bio: "Hi! I'm Brandie, owner of Looking Glass Salon. I have been behind the chair for 25 years. I got into the industry at 16, working as a receptionist at a local salon in Reston, and I fell in love with how a stylist can change someone's day by making them feel heard and seen, as well as beautiful.\n\nI trained at Graham Webb Academy and have continued my education with Vidal Sassoon, Bumble and bumble and Kevin Murphy. I stay on top of new trends, and I have the training and technical skills to get the best results.\n\nI come to every appointment with an open mind and a real sense of what that person needs, which often goes much deeper than just hair. My salon is a space where guests feel welcome and comfortable and I take pride in knowing they leave our appointment feeling better than when they came in.",
+    training: "Graham Webb Academy, with continuing education from Vidal Sassoon, Bumble and bumble and Kevin Murphy.",
+    certified: "Certified in the Cezanne Keratin Smoothing System and Aqua Hair Extensions. Trained in Wella, Redken, Kevin Murphy and Goldwell color.",
+    knownFor: "Blondes and highlights, balayage, color and color fixes, and cuts.",
+    funFact: "I love making something old new again, and spend my free time upcycling clothes and honing my craft on my sewing machine. I am also a plant enthusiast with quite the collection of house plants.",
+    products: "I carry Amika, Redken, Living Proof, Bumble and bumble, Ouidad, K18, WOW and Olaplex.",
+    storeUrl: "https://shop.saloninteractive.com/store/LookingGlassSalonLLC"
+  },
+  policies: {
+    cancellation: "24 hours' notice is needed. Late cancellations and no-shows are charged half of the appointment price.",
+    deposits: "Deposits are only needed for extensions: $75 for a new tape-in installation and $175 for a tape-in move up.",
+    payment: "Cash, credit or debit card, Apple Pay, Venmo and Zelle.",
+    guests: "Kids and guests are welcome to come along.",
+    consultation: "New guests only need a consultation before big changes or color fixes."
+  },
   domain: null
 };
 
@@ -29,7 +59,9 @@ window.SERVICES = [
     {"name":"Women's Haircut & Blow Dry/Style","price":"$100+","duration":60},
     {"name":"Men's Haircut","price":"$70+","duration":45},
     {"name":"Children's Cut (10 & under)","price":"$60+","duration":45},
-    {"name":"Shampoo & Blow Dry/Style","price":"$70+","duration":45,"desc":"A pampering shampoo and blow dry/style service."}
+    {"name":"Shampoo & Blow Dry/Style","price":"$70+","duration":45,"desc":"A pampering shampoo and blow dry/style service."},
+    {"name":"Bang Trim","price":"$20","duration":15,"desc":"A precise bang trim to keep your style on point.","cat":"Consultation & Cuts"},
+    {"name":"Perm + Cut/Style","price":"$230+","duration":145}
   ]},
   { cat: "Color", items: [
     {"name":"Color Retouch & Style","price":"$230+","duration":135,"desc":"Color gloss included unless specified. With a cut: $260+, 150 min."},
@@ -45,12 +77,13 @@ window.SERVICES = [
   { cat: "Smoothing Treatments", items: [
     {"name":"Cezanne Keratin Express Treatment","price":"$220+","duration":120,"desc":"Formaldehyde-free keratin smoothing. Quicker service, results last about 3 months."},
     {"name":"Cezanne Keratin Smoothing Treatment","price":"$400+","duration":180,"desc":"Formaldehyde-free keratin smoothing. Longer-lasting, results last about 5 months."},
-    {"name":"Blonde Keratin Treatment","price":"$200+","duration":120,"desc":"Made for blondes: smooths and tones without added warmth. The Express version starts at $200 and takes about 2 hours. The Ultimate Blonde version starts at $400, takes about 3 hours and lasts about 5 months."}
+    {"name":"Cezanne Ultimate Blonde Treatment","price":"$400+","duration":180,"desc":"Lasts about 5 months. Blue-violet pigment to remove brassy shades while smoothing damaged hair.","cat":"Smoothing Treatments"}
   ]},
   { cat: "Extensions", items: [
     {"name":"Tape Extension Installation","price":"$435+","duration":90,"desc":"$75.00 deposit required for new clients. First time installation of tape in hair extensions. Cost starts at $120 per 10 piece bundle, depending on length of hair, available in 14”, 20” and 24”. Installation is $175. Additional charge for custom color work. Average head is between 2-3 bundles depending on the desired look."},
     {"name":"Tape Extension Move Up","price":"$250+","duration":150,"desc":"$175.00 deposit required. Hair tape in extensions is removed, washed, and reinstalled. Hair can last up to a year with 6-8 week maintenance and proper care."},
-    {"name":"Sew-In Micro Weft Installation","price":"$500+","duration":180,"desc":"Hair not included. Starting price; varies by number of rows."}
+    {"name":"Sew-In Micro Weft Installation","price":"$500+","duration":180,"desc":"Hair not included. Starting price; varies by number of rows."},
+    {"name":"Sew-In Micro Weft Removal","price":"$75","duration":30,"desc":"Removal only. Does not include putting wefts back in.","cat":"Extensions"}
   ]}
 ];
 
@@ -67,9 +100,7 @@ window.ADDONS = [
 
 // Not shown on the site (kept so nothing is lost): the less-requested services, plus the '+ cut' versions now folded into their cards.
 window.MORE_SERVICES = [
-  {"name":"Bang Trim","price":"$20","duration":15,"desc":"A precise bang trim to keep your style on point.","cat":"Consultation & Cuts"},
-  {"name":"Perm + Cut/Style","price":"$230+","duration":145,"cat":"Color"},
-  {"name":"Sew-In Micro Weft Removal","price":"$75","duration":30,"desc":"Removal only. Does not include putting wefts back in.","cat":"Extensions"},
+    {"name":"Blonde Keratin Treatment","price":"$200+","duration":120,"desc":"Made for blondes: smooths and tones without added warmth. The Express version starts at $200 and takes about 2 hours. The Ultimate Blonde version starts at $400, takes about 3 hours and lasts about 5 months."},
   {"name":"Sew-In Weft Move Up","price":"$200+","duration":120,"desc":"Sew-in removal and reinstall.","cat":"Extensions"},
   {"name":"Extension Removal","price":"$75","duration":45,"cat":"Extensions"},
   {"name":"Replace Hair Extensions","price":"$250","duration":150,"cat":"Extensions"},
@@ -80,7 +111,6 @@ window.MORE_SERVICES = [
   {"name":"Face Frame Highlight + Cut/Style","price":"$260","duration":150,"desc":"Gloss included unless specified.","cat":"Highlights & Balayage"},
   {"name":"Balayage + Cut/Style","price":"$400","duration":210,"desc":"Gloss included unless specified.","cat":"Highlights & Balayage"},
   {"name":"Express Blonde Keratin Treatment","price":"$200+","duration":120,"desc":"Quick keratin treatment made for blondes, smooths and tones without added warmth.","cat":"Smoothing Treatments"},
-  {"name":"Cezanne Ultimate Blonde Treatment","price":"$400+","duration":180,"desc":"Lasts about 5 months. Blue-violet pigment to remove brassy shades while smoothing damaged hair.","cat":"Smoothing Treatments"},
   {"name":"Tape Extension Removal / Reinstall","price":"$250+","duration":150,"desc":"$175.00 deposit required. Hair tape in extensions is removed, washed, and reinstalled. Hair can last up to a year with 6-8 week maintenance and proper care.","cat":"Extensions"}
 ];
 

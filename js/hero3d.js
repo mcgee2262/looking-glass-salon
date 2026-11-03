@@ -65,7 +65,7 @@
     { c0: 0x1c100a, c1: 0x5a3a28, lane:  0.80, ph: 4.4, sp: 0.38, amp: 0.20, z: -2.1, w: 0.46 },  // espresso
     { c0: 0x59381a, c1: 0xa87e42, lane: -0.90, ph: 5.2, sp: 0.55, amp: 0.16, z: -0.6, w: 0.34 },  // caramel
     { c0: 0x4a1d0c, c1: 0x93441f, lane:  0.88, ph: 2.4, sp: 0.47, amp: 0.15, z: -1.1, w: 0.32 }   // copper, thinner
-  ].slice(0, small ? 4 : 6);
+  ].slice(0, small ? 2 : 3);   // calmer: fewer locks
   LOCKS.forEach(function (L2) { L2.cx = 0; L2.cy = 0; });
   var tmpc = new THREE.Color(), tmpd = new THREE.Color();
   LOCKS.forEach(function (L2, li) {
@@ -161,7 +161,7 @@
   new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible && !reduce) loop(); }).observe(hero);
 
   function frame(now) {
-    var t = (now - t0) / 1000;
+    var t = (now - t0) / 2200;   // calmer: slow drift
     var intro = reduce ? 1 : Math.min(1, t / 2.6); intro = intro * intro * (3 - 2 * intro);
     nx += (tx - nx) * 0.05; ny += (ty - ny) * 0.05;
     updateHair(t, nx * HW * 0.8, -ny * HH * 0.8, 0.35 + 0.65 * intro);

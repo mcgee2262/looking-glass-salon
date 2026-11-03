@@ -1,4 +1,6 @@
-// Booking preview: looks and feels like real booking, but nothing is sent or saved.
+// Booking request: the client picks a service, extras, a preferred time and their details, sees a thank-you,
+// then is sent to GlossGenius (SALON.glossGeniusBookUrl) to make the real appointment. Nothing is stored here yet;
+// submitLead() is the one place to hand the lead to the looking-glass-crm app once it exists.
 (function () {
   var panel = document.getElementById("bk-panel");
   if (!panel) return;
@@ -14,7 +16,8 @@
     "Color Retouch & Style": "color-retouch", "All-Over Color & Style": "all-over-color", "Gloss/Toner": "gloss-toner",
     "Partial Highlight + Style": "partial-highlight", "Full Highlight & Style": "full-highlight", "Face Frame Highlight & Style": "face-frame", "Balayage + Style": "balayage",
     "Cezanne Keratin Express Treatment": "keratin-express", "Cezanne Keratin Smoothing Treatment": "keratin-smoothing", "Blonde Keratin Treatment": "blonde-keratin",
-    "Tape Extension Installation": "tape-install", "Tape Extension Move Up": "tape-moveup", "Sew-In Micro Weft Installation": "sew-in",
+    "Tape Extension Installation": "tape-install", "Bang Trim": "womens-cut", "Perm + Cut/Style": "womens-cut",
+    "Sew-In Micro Weft Removal": "sew-in", "Cezanne Ultimate Blonde Treatment": "blonde-keratin", "Tape Extension Move Up": "tape-moveup", "Sew-In Micro Weft Installation": "sew-in",
     "Add On Full Highlights": "full-highlight", "Add On Face Frame Highlights": "face-frame", "Add On Partial Highlights": "partial-highlight",
     "Add On Color Retouch": "color-retouch", "Extra Product Charge": "add-ons", "Conditioning Treatment": "gloss-toner", "Malibu Treatment": "add-ons"
   };
@@ -59,7 +62,7 @@
   }
 
   function go(n) {
-    st.step = n;
+    st.step = n; stopTimer();
     steps.forEach(function (li) {
       var k = +li.dataset.step;
       li.className = k < n ? "done" : k === n ? "now" : "";
@@ -102,12 +105,14 @@
       '<p class="bk-next"><button type="button" class="btn big" data-go="3">' + (st.extras.length ? "Continue" : "Skip extras") + '</button></p>';
   }
 
-  // sample availability: closed Sun/Mon, some slots taken; stable per date so it feels real
+  // Brandie's real hours (SALON.hours runs Monday to Sunday). Times are preferences; GlossGenius confirms what is open.
+  function hoursFor(d) { return window.SALON.hours[(d.getDay() + 6) % 7]; }
+  function isClosed(d) { return hoursFor(d).open == null; }
   function slots(d) {
-    var out = [], seed = d.getDate() * 7 + d.getMonth() * 3;
-    for (var h = 9; h < 17; h++) for (var m = 0; m < 60; m += 30) {
-      seed = (seed * 31 + 11) % 97;
-      out.push({ t: (h > 12 ? h - 12 : h) + ":" + (m ? "30" : "00") + (h >= 12 ? " PM" : " AM"), open: seed % 3 !== 0 });
+    var h = hoursFor(d), out = [];
+    for (var m = h.open * 60; m <= h.close * 60 - 60; m += 30) {
+      var hr = Math.floor(m / 60), mm = m % 60;
+      out.push({ t: (hr > 12 ? hr - 12 : hr) + ":" + (mm ? "30" : "00") + (hr >= 12 ? " PM" : " AM"), open: true });
     }
     return out;
   }
@@ -115,11 +120,11 @@
     var today = new Date(); today.setHours(0, 0, 0, 0);
     var days = [];
     for (var k = 1; days.length < 14; k++) { var d = new Date(today); d.setDate(today.getDate() + k); days.push(d); }
-    if (!st.date) st.date = days.filter(function (d) { return d.getDay() > 1; })[0];
-    var open = st.date.getDay() > 1;
-    panel.innerHTML = back(2) + '<h2>Pick a date and time</h2><p class="bk-muted">Sample times for this preview. Real hours are to be confirmed.</p>' +
+    if (!st.date) st.date = days.filter(function (d) { return !isClosed(d); })[0];
+    var open = !isClosed(st.date);
+    panel.innerHTML = back(2) + '<h2>Pick your preferred day and time</h2><p class="bk-muted">This is the time you would like. You will lock in the exact time on GlossGenius in the last step.</p>' +
       '<div class="bk-days" role="group" aria-label="Dates">' + days.map(function (d, i) {
-        var closed = d.getDay() <= 1, on = +d === +st.date;
+        var closed = isClosed(d), on = +d === +st.date;
         return '<button type="button" class="bk-day" data-day="' + i + '" aria-pressed="' + on + '"' + (closed ? ' disabled' : '') +
           ' aria-label="' + fmtDate(d) + (closed ? ', closed' : '') + '"><small>' + d.toLocaleDateString("en-US", { weekday: "short" }) +
           '</small><strong>' + d.getDate() + '</strong><small>' + (closed ? "Closed" : d.toLocaleDateString("en-US", { month: "short" })) + '</small></button>';
@@ -144,7 +149,7 @@
       '<p class="bk-field"><label for="bk-notes">Anything we should know? <span class="bk-muted">(optional)</span></label><textarea id="bk-notes" name="notes" rows="3">' + esc(w.notes || "") + '</textarea></p>' +
       '<p class="bk-field bk-err" role="alert"></p>' +
       '<p class="bk-next"><button type="submit" class="btn big">Request appointment</button></p>' +
-      '<p class="bk-muted bk-small">Preview only: this form does not send anything.</p></form>';
+      '<p class="bk-muted bk-small">' + esc(window.SALON.policies.cancellation) + ' Next you will finish booking on GlossGenius.</p></form>';
     panel.querySelector("#bk-form").addEventListener("submit", function (e) {
       e.preventDefault();
       var fm = e.target, bad = Array.prototype.filter.call(fm.querySelectorAll("[required]"), function (i) { return !i.checkValidity(); });
@@ -155,11 +160,29 @@
     });
   }
 
+  // CRM hook: when the looking-glass-crm app exists, define window.LG_SUBMIT_LEAD(lead) and it receives each request.
+  function submitLead(lead) { if (typeof window.LG_SUBMIT_LEAD === "function") { try { window.LG_SUBMIT_LEAD(lead); } catch (e) {} } }
+
+  var timer = 0;
+  function stopTimer() { if (timer) { clearInterval(timer); timer = 0; } }
+
   function stepDone() {
-    panel.innerHTML = '<div class="bk-done"><div class="bk-seal" aria-hidden="true">✓</div><h2>You’re all set' + (st.who && st.who.name ? ', ' + esc(st.who.name.split(" ")[0]) : '') + '!</h2>' +
-      '<p>Brandie will see you for ' + esc(st.svc.name) + ' on ' + fmtDate(st.date) + ' at ' + st.time + '.</p>' +
-      '<p class="bk-demo"><strong>Preview only.</strong> This is what clients would see. No appointment was made and nothing was sent.</p>' +
-      '<p class="bk-next"><button type="button" class="btn big" data-reset>Start over</button></p></div>';
+    var url = window.SALON.glossGeniusBookUrl, first = st.who && st.who.name ? st.who.name.split(" ")[0] : "";
+    submitLead({ name: st.who.name, phone: st.who.phone, email: st.who.email, notes: st.who.notes,
+      service: st.svc.name, extras: st.extras.map(function (x) { return x.name; }), preferredDate: fmtDate(st.date), preferredTime: st.time });
+    panel.innerHTML = '<div class="bk-done"><div class="bk-seal" aria-hidden="true">✓</div><h2>Thank you' + (first ? ', ' + esc(first) : '') + '!</h2>' +
+      '<p>We have your request for <strong>' + esc(st.svc.name) + '</strong>' + (st.extras.length ? ' with ' + st.extras.map(function (x) { return esc(x.name); }).join(", ") : '') +
+      ', around ' + fmtDate(st.date) + ' at ' + st.time + '.</p>' +
+      '<p>One more step: finish your booking on GlossGenius to lock in your time. Pick the same service there.</p>' +
+      '<p class="bk-muted" id="bk-count">Taking you there in <span id="bk-secs">8</span> seconds.</p>' +
+      '<p class="bk-next"><a class="btn big" href="' + esc(url) + '">Continue to GlossGenius</a> <button type="button" class="btn alt" data-stay>Stay on this page</button></p></div>';
+    var secs = 8;
+    stopTimer();
+    timer = setInterval(function () {
+      secs--;
+      var el = document.getElementById("bk-secs"); if (el) el.textContent = secs;
+      if (secs <= 0) { stopTimer(); window.location.href = url; }
+    }, 1000);
   }
 
   panel.addEventListener("click", function (e) {
@@ -174,6 +197,7 @@
     if (b.dataset.day) { st.date = panel._days[+b.dataset.day]; st.time = null; stepTime(); summary(); panel.querySelector('[data-day="' + b.dataset.day + '"]').focus(); return; }
     if (b.dataset.time) { st.time = b.dataset.time; stepTime(); summary(); panel.querySelector('[data-time="' + b.dataset.time + '"]').focus(); return; }
     if (b.dataset.go) { var n = +b.dataset.go; if (n === 2 && st.svc && st.svc.cat === "Add-Ons") n = 1; go(n); return; }
+    if (b.hasAttribute("data-stay")) { stopTimer(); var c = document.getElementById("bk-count"); if (c) c.textContent = "You are still here. Use the button above whenever you are ready."; b.outerHTML = '<button type="button" class="btn alt" data-reset>Start over</button>'; return; }
     if (b.hasAttribute("data-reset")) { st = { step: 1, cat: "All", svc: null, extras: [], date: null, time: null, who: null }; go(1); }
   });
 

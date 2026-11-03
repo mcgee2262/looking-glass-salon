@@ -2,7 +2,7 @@
 
 ## 👉 View the live site: https://mcgee2262.github.io/looking-glass-salon/
 
-This is a **draft for the owner to review**. Service names, prices and times were copied from the public GlossGenius page and are not yet approved. Anything marked "To be confirmed" is waiting on the owner. Booking happens on GlossGenius.
+The owner filled in her contact details, hours, story, policies and service edits on 2026-11-02 (Google Form). Her own form answers are not stored in this repo. Real appointments are made on GlossGenius: the site's booking page collects a request, thanks the client, then sends them to GlossGenius.
 
 Pages: [Home](https://mcgee2262.github.io/looking-glass-salon/) · [Services](https://mcgee2262.github.io/looking-glass-salon/services.html) · [Gallery](https://mcgee2262.github.io/looking-glass-salon/gallery.html) · [About](https://mcgee2262.github.io/looking-glass-salon/about.html) · [Visit](https://mcgee2262.github.io/looking-glass-salon/visit.html)
 
@@ -14,7 +14,7 @@ Changes can take about a minute to appear after they are pushed.
 Plain static HTML/CSS/JS. No build step. Booking stays on GlossGenius.
 
 - Edit business details, services, gallery: `js/content.js` (only place).
-- Booking: every Book button goes to the site's own booking page (`book.html`, `SALON.bookingUrl`). Never point Book buttons at GlossGenius. The footer has an "Old website" button linking her GlossGenius site (`SALON.oldSiteUrl`) for reference only.
+- Booking: every Book button goes to the site's own booking page (`book.html`, `SALON.bookingUrl`). The booking page's last step thanks the client and then sends them to GlossGenius (`SALON.glossGeniusBookUrl`). Hand each request to the CRM by defining `window.LG_SUBMIT_LEAD(lead)` (see `submitLead` in `js/book.js`). The footer has an "Old website" button linking her GlossGenius site (`SALON.oldSiteUrl`) for reference only.
 - Run locally: `python3 -m http.server 8431`
 - Every service/price/duration came from the public GlossGenius page on 2026-10-25. Unapproved. Null fields show "To be confirmed".
 - Pages carry `noindex`. Remove it, add canonical, og:image and LocalBusiness JSON-LD after owner approval and domain pick.

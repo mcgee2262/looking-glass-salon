@@ -26,6 +26,9 @@
 
   document.getElementById("site-footer").innerHTML =
     '<p><strong>' + esc(S.name) + '</strong> · ' + esc(S.owner.name) + ', ' + esc(S.owner.role.toLowerCase()) + ' · ' + (S.location.city ? esc(S.location.city) : tbc) + '</p>' +
+    '<p>' + (S.phone ? '<a href="tel:' + esc(S.phone.tel) + '">' + esc(S.phone.display) + '</a>' : '') +
+      (S.social.instagram ? ' · <a href="https://www.instagram.com/' + esc(S.social.instagram) + '/" target="_blank" rel="noopener">Instagram</a>' : '') +
+      (S.social.tiktok ? ' · <a href="https://www.tiktok.com/@' + esc(S.social.tiktok) + '" target="_blank" rel="noopener">TikTok</a>' : '') + '</p>' +
     '<p><a href="'+S.bookingUrl+'">Book an appointment</a> <a class="old-site" href="'+S.oldSiteUrl+'" target="_blank" rel="noopener">Old website <span aria-hidden="true">\u2197</span></a></p>' +
     '<p class="fine">Still-life pictures of salon tools and products (shears, mirrors, clippers, hair wefts) are AI-generated brand art, not photos of the salon. Hair photos are Brandie\u2019s own work.</p>';
 
@@ -145,26 +148,31 @@
     foot.parentNode.insertBefore(em, foot);
   }
 
-  // 3D tilt with a gold glare on cards, photos and tiles
-  if (window.matchMedia("(hover:hover) and (pointer:fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    var TILT = ".svc-card,.fact,.pic,.tile";
-    document.addEventListener("pointermove", function (e) {
-      var c = e.target.closest && e.target.closest(TILT); if (!c) return;
-      var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-      var amp = r.width > 420 ? 5 : 10;
-      c.style.transform = "perspective(800px) rotateY(" + ((x - .5) * amp) + "deg) rotateX(" + ((.5 - y) * amp) + "deg) translateZ(0)";
-      c.style.setProperty("--mx", (x * 100) + "%"); c.style.setProperty("--my", (y * 100) + "%");
-      c.classList.add("is-tilting");
-    });
-    document.addEventListener("pointerout", function (e) {
-      var c = e.target.closest && e.target.closest(TILT);
-      if (c && !c.contains(e.relatedTarget)) { c.style.transform = ""; c.classList.remove("is-tilting"); }
-    });
-  }
+  // (the hover tilt on cards and photos was removed on purpose: calmer, less busy)
 
+  // how each fact is written on the page; anything not listed here is plain text
+  function linkOut(href, text) { return '<a href="' + esc(href) + '" target="_blank" rel="noopener">' + esc(text) + '</a>'; }
+  var FACT = {
+    "location.address": function (v) { return esc(v) + '<br>' + linkOut("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(v), "Get directions"); },
+    "phone": function (v) { return '<a href="tel:' + esc(v.tel) + '">' + esc(v.display) + '</a> · <a href="sms:' + esc(v.tel) + '">Text us</a>'; },
+    "email": function (v) { return '<a href="mailto:' + esc(v) + '">' + esc(v) + '</a>'; },
+    "hours": function (v) {
+      return '<ul class="hours">' + v.map(function (h) { return '<li><span>' + esc(h.day) + '</span><span>' + esc(h.text) + '</span></li>'; }).join("") + '</ul>';
+    },
+    "social": function (v) {
+      var out = [];
+      if (v.instagram) out.push(linkOut("https://www.instagram.com/" + v.instagram + "/", "Instagram @" + v.instagram));
+      if (v.tiktok) out.push(linkOut("https://www.tiktok.com/@" + v.tiktok, "TikTok @" + v.tiktok));
+      if (v.facebook) out.push(linkOut(v.facebook, "Facebook"));
+      return out.join(" · ");
+    },
+    "owner.bio": function (v) { return v.split("\n\n").map(function (t) { return '<p>' + esc(t) + '</p>'; }).join(""); },
+    "owner.products": function (v) { return esc(v) + ' ' + linkOut(S.owner.storeUrl, "Shop her online store"); }
+  };
   document.querySelectorAll("[data-fact]").forEach(function(e){
-    var v = e.dataset.fact.split(".").reduce(function(o,k){return o && o[k];}, S);
-    e.innerHTML = v ? esc(v) : tbc;
+    var key = e.dataset.fact;
+    var v = key.split(".").reduce(function(o,k){return o && o[k];}, S);
+    e.innerHTML = v ? (FACT[key] ? FACT[key](v) : esc(v)) : tbc;
   });
 
 
