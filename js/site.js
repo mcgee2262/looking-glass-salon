@@ -29,8 +29,7 @@
     '<p>' + (S.phone ? '<a href="tel:' + esc(S.phone.tel) + '">' + esc(S.phone.display) + '</a>' : '') +
       (S.social.instagram ? ' · <a href="https://www.instagram.com/' + esc(S.social.instagram) + '/" target="_blank" rel="noopener">Instagram</a>' : '') +
       (S.social.tiktok ? ' · <a href="https://www.tiktok.com/@' + esc(S.social.tiktok) + '" target="_blank" rel="noopener">TikTok</a>' : '') + '</p>' +
-    '<p><a href="'+S.bookingUrl+'">Book an appointment</a> <a class="old-site" href="'+S.oldSiteUrl+'" target="_blank" rel="noopener">Old website <span aria-hidden="true">\u2197</span></a></p>' +
-    '<p class="fine">Still-life pictures of salon tools and products (shears, mirrors, clippers, hair wefts) are AI-generated brand art, not photos of the salon. Hair photos are Brandie\u2019s own work.</p>';
+    '<p><a href="'+S.bookingUrl+'">Book an appointment</a> <a class="old-site" href="'+S.oldSiteUrl+'" target="_blank" rel="noopener">Old website <span aria-hidden="true">\u2197</span></a></p>';
 
   // the bar stays pinned; it gets slimmer once the page is scrolled
   var bar = document.querySelector(".bar");
