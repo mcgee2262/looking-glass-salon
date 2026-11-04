@@ -98,7 +98,7 @@
     panel.innerHTML = back(1) + '<h2>Add any extras?</h2><p class="bk-muted">Optional. Tap to add or remove.</p>' +
       '<div class="bk-extras">' + opts.map(function (a) {
         var on = st.extras.indexOf(a) >= 0;
-        return '<button type="button" class="bk-extra" data-extra="' + all.indexOf(a) + '" aria-pressed="' + on + '">' + thumb(a, "bk-mini") +
+        return '<button type="button" class="bk-extra" data-extra="' + addOns.indexOf(a) + '" aria-pressed="' + on + '">' + thumb(a, "bk-mini") +
           '<span class="bk-xname">' + esc(a.name) + '<small>' + esc(a.desc || "") + '</small></span>' +
           '<span class="bk-xprice">' + esc(a.price) + '</span><span class="bk-check" aria-hidden="true">' + (on ? "✓" : "+") + '</span></button>';
       }).join("") + '</div>' +
@@ -190,7 +190,7 @@
     if (b.dataset.cat) { st.cat = b.dataset.cat; stepService(); if (window.__reveal) window.__reveal(panel); return; }
     if (b.dataset.svc) { st.svc = all[+b.dataset.svc]; st.extras = []; go(st.svc.cat === "Add-Ons" ? 3 : 2); return; }
     if (b.dataset.extra) {
-      var a = all[+b.dataset.extra], at = st.extras.indexOf(a);
+      var a = addOns[+b.dataset.extra], at = st.extras.indexOf(a);
       if (at >= 0) st.extras.splice(at, 1); else st.extras.push(a);
       stepExtras(); summary(); panel.querySelector('[data-extra="' + b.dataset.extra + '"]').focus(); return;
     }
